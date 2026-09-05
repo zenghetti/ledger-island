@@ -1,0 +1,1807 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Ledger Island</title>
+<meta name="description" content="An idle island game where every action posts a real double-entry journal entry.">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="Ledger Island">
+<meta name="theme-color" content="#E7F0EC" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#06201F" media="(prefers-color-scheme: dark)">
+<link rel="apple-touch-icon" href="data:image/png;base64,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">
+<link rel="icon" type="image/png" href="data:image/png;base64,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">
+<style>:root{color-scheme:light dark}html{-webkit-text-size-adjust:100%}img{max-width:100%}[hidden]{display:none!important}</style>
+</head>
+<body>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,500;9..144,700;9..144,900&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<style>
+:root{
+  --bg:#E7F0EC; --surface:#FAFDFB; --surface-2:#EFF6F2; --surface-3:#E2EDE8;
+  --ink:#11302E; --ink-2:#4C6C67; --ink-3:#7B9891;
+  --line:#C7DBD4; --line-soft:#DCEAE4;
+  --accent:#0E7C6F; --accent-ink:#FFFFFF; --accent-soft:#D2E9E3;
+  --gold:#A96A0C; --gold-soft:#F5E3C1;
+  --danger:#AC2B47; --danger-soft:#F7DBE1;
+  --good:#276F45;
+  --sky-1:#B6E2EE; --sky-2:#E9F5EC; --orb:#F5C868; --orb-glow:#FBE6B4;
+  --sea-1:#43ADBB; --sea-2:#1B7B90; --foam:#DCF1F2;
+  --sand:#E9D4AA; --sand-2:#D6BB88;
+  --palm:#31804F; --palm-2:#1F5C3B; --trunk:#8C6239;
+  --wood:#8B5B34; --wood-2:#68411F; --thatch:#C89A54; --thatch-2:#A2762F;
+  --wall:#E7D7B7; --wall-2:#CDB88F; --pane:#7FBFC4; --flame:#F0912A;
+  --crew:#3D5C6B;
+  --shadow:0 1px 2px rgba(17,48,46,.07), 0 10px 26px -14px rgba(17,48,46,.32);
+  --shadow-lift:0 2px 4px rgba(17,48,46,.08), 0 18px 40px -18px rgba(17,48,46,.42);
+  --r:14px;
+  --font-ui:"Archivo","Helvetica Neue",Helvetica,Arial,sans-serif;
+  --font-dis:"Fraunces",Georgia,"Times New Roman",serif;
+  --font-num:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg:#06201F; --surface:#0C2B29; --surface-2:#10332F; --surface-3:#153B37;
+    --ink:#DDEEE8; --ink-2:#94B5AD; --ink-3:#6C908A;
+    --line:#1E4643; --line-soft:#173A37;
+    --accent:#43C3AC; --accent-ink:#04211D; --accent-soft:#123F39;
+    --gold:#EBB253; --gold-soft:#382C13;
+    --danger:#F2798F; --danger-soft:#3C1A24;
+    --good:#5FC98C;
+    --sky-1:#123246; --sky-2:#0A2430; --orb:#E9DCB4; --orb-glow:#2A4055;
+    --sea-1:#175E70; --sea-2:#0A3644; --foam:#2A6B78;
+    --sand:#7B6748; --sand-2:#5C4C36; --palm:#2B7049; --palm-2:#1A4D32; --trunk:#5E442A;
+    --wood:#6C482D; --wood-2:#4B3120; --thatch:#9B7843; --thatch-2:#795B2F;
+    --wall:#87775A; --wall-2:#665941; --pane:#2E6C74; --flame:#F5A63C;
+    --crew:#9FBFCE;
+    --shadow:0 1px 2px rgba(0,0,0,.3), 0 10px 26px -14px rgba(0,0,0,.7);
+    --shadow-lift:0 2px 4px rgba(0,0,0,.35), 0 18px 40px -18px rgba(0,0,0,.8);
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#06201F; --surface:#0C2B29; --surface-2:#10332F; --surface-3:#153B37;
+  --ink:#DDEEE8; --ink-2:#94B5AD; --ink-3:#6C908A;
+  --line:#1E4643; --line-soft:#173A37;
+  --accent:#43C3AC; --accent-ink:#04211D; --accent-soft:#123F39;
+  --gold:#EBB253; --gold-soft:#382C13;
+  --danger:#F2798F; --danger-soft:#3C1A24;
+  --good:#5FC98C;
+  --sky-1:#123246; --sky-2:#0A2430; --orb:#E9DCB4; --orb-glow:#2A4055;
+  --sea-1:#175E70; --sea-2:#0A3644; --foam:#2A6B78;
+  --sand:#7B6748; --sand-2:#5C4C36; --palm:#2B7049; --palm-2:#1A4D32; --trunk:#5E442A;
+  --wood:#6C482D; --wood-2:#4B3120; --thatch:#9B7843; --thatch-2:#795B2F;
+  --wall:#87775A; --wall-2:#665941; --pane:#2E6C74; --flame:#F5A63C;
+  --crew:#9FBFCE;
+  --shadow:0 1px 2px rgba(0,0,0,.3), 0 10px 26px -14px rgba(0,0,0,.7);
+  --shadow-lift:0 2px 4px rgba(0,0,0,.35), 0 18px 40px -18px rgba(0,0,0,.8);
+}
+
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--font-ui);font-size:15px;line-height:1.5;
+  -webkit-text-size-adjust:100%;-webkit-tap-highlight-color:transparent;overscroll-behavior-y:none}
+button{font:inherit;color:inherit}
+:focus-visible{outline:2.5px solid var(--accent);outline-offset:2px;border-radius:6px}
+
+.shell{max-width:560px;margin:0 auto;min-height:100vh;display:flex;flex-direction:column;background:var(--bg);position:relative}
+
+.status{position:sticky;top:0;z-index:30;background:var(--surface);border-bottom:1px solid var(--line);
+  padding:calc(env(safe-area-inset-top,0px) + 8px) 13px 8px;display:flex;align-items:center;gap:10px}
+.brand{display:flex;flex-direction:column;gap:1px;flex:0 0 auto}
+.brand b{font-family:var(--font-dis);font-weight:900;font-size:16px;letter-spacing:-.01em;line-height:1}
+.brand span{font-size:9.5px;letter-spacing:.09em;text-transform:uppercase;color:var(--ink-3);font-weight:600}
+.stats{display:flex;justify-content:flex-end;gap:12px;align-items:center;flex:1;min-width:0}
+.stat{display:flex;flex-direction:column;align-items:flex-end;gap:0}
+.stat i{font-style:normal;font-size:9px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3);font-weight:600}
+.stat b{font-family:var(--font-num);font-weight:600;font-size:14px;font-variant-numeric:tabular-nums;line-height:1.25;white-space:nowrap}
+.stat.cash b{color:var(--accent)}
+.stat.warn b{color:var(--gold)}
+.stat.crit b{color:var(--danger)}
+
+.scene{position:relative;background:var(--surface);border-bottom:1px solid var(--line)}
+.scene svg{display:block;width:100%;height:auto}
+.scene-cap{position:absolute;left:12px;bottom:10px;right:12px;display:flex;justify-content:space-between;align-items:flex-end;gap:10px;pointer-events:none}
+.plaque{background:color-mix(in srgb,var(--surface) 86%,transparent);border:1px solid var(--line);border-radius:9px;
+  padding:5px 9px;backdrop-filter:blur(6px)}
+.plaque i{display:block;font-style:normal;font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3);font-weight:700}
+.plaque b{font-family:var(--font-dis);font-weight:700;font-size:13.5px;line-height:1.2}
+.progtrack{height:5px;border-radius:99px;background:var(--surface-3);overflow:hidden;margin-top:5px;width:104px}
+.progfill{height:100%;background:var(--gold);border-radius:99px;transition:width .5s ease}
+
+main{flex:1;padding:16px 14px calc(env(safe-area-inset-bottom,0px) + 84px);display:flex;flex-direction:column;gap:14px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);box-shadow:var(--shadow)}
+.card>header{padding:13px 15px 0;display:flex;justify-content:space-between;align-items:baseline;gap:10px}
+.card>header h2{margin:0;font-family:var(--font-dis);font-weight:700;font-size:16.5px;letter-spacing:-.01em}
+.card>header p{margin:0;font-size:11.5px;color:var(--ink-3);font-weight:500;text-align:right;white-space:nowrap}
+.card .body{padding:12px 15px 15px;display:flex;flex-direction:column;gap:10px}
+.sub{margin:0;font-size:12.5px;color:var(--ink-2);line-height:1.55}
+.eyebrow{font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3);font-weight:700;margin:0}
+
+.jobs{display:flex;flex-direction:column;gap:9px}
+.job{position:relative;overflow:hidden;display:grid;grid-template-columns:1fr auto;align-items:center;gap:12px;width:100%;
+  text-align:left;background:var(--surface-2);border:1px solid var(--line);border-radius:11px;padding:11px 13px;
+  cursor:pointer;transition:transform .09s ease,border-color .15s ease}
+.job:active{transform:scale(.985)}
+.job .cool{position:absolute;inset:0;background:var(--accent-soft);width:0%;transition:width .1s linear;pointer-events:none}
+.job>*{position:relative;z-index:1}
+.job .nm{display:flex;flex-direction:column;gap:1px;min-width:0}
+.job .nm b{font-size:14.5px;font-weight:600}
+.job .nm span{font-size:11.5px;color:var(--ink-3);font-weight:500}
+.job .pay{font-family:var(--font-num);font-weight:600;font-size:15px;color:var(--accent);font-variant-numeric:tabular-nums;white-space:nowrap}
+.job[disabled]{opacity:.5;cursor:not-allowed}
+.job.locked{background:transparent;border-style:dashed}
+.job.locked .pay{color:var(--ink-3)}
+.job.ready{border-color:var(--accent)}
+.mult{display:inline-block;font-family:var(--font-num);font-size:10px;font-weight:600;padding:1px 5px;border-radius:5px;
+  background:var(--gold-soft);color:var(--gold);margin-left:5px}
+
+.row{display:grid;grid-template-columns:1fr auto;gap:12px;align-items:center;padding:11px 13px;
+  background:var(--surface-2);border:1px solid var(--line);border-radius:11px}
+.row.stack{grid-template-columns:1fr;gap:9px}
+.row .nm{min-width:0}
+.row .nm b{display:block;font-size:14px;font-weight:600}
+.row .nm span{display:block;font-size:11.5px;color:var(--ink-3);line-height:1.45;font-weight:500}
+.btn{background:var(--accent);color:var(--accent-ink);border:1px solid transparent;border-radius:9px;padding:8px 13px;
+  font-weight:600;font-size:13px;cursor:pointer;white-space:nowrap;transition:transform .09s ease,opacity .15s ease}
+.btn:active{transform:scale(.96)}
+.btn[disabled]{opacity:.4;cursor:not-allowed}
+.btn.ghost{background:var(--surface);color:var(--ink);border-color:var(--ink-3)}
+.btn.gold{background:var(--gold);color:#fff}
+.btn.danger{background:transparent;color:var(--danger);border-color:var(--danger)}
+.btn.wide{width:100%;text-align:center;padding:11px}
+.btn.sm{padding:6px 10px;font-size:12px}
+.btnstack{display:flex;flex-direction:column;gap:6px;align-items:stretch}
+.btnrow{display:flex;gap:6px;flex-wrap:wrap}
+.btnrow .btn{flex:1 1 auto}
+.tag{display:inline-block;font-size:10px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;padding:2.5px 7px;
+  border-radius:99px;background:var(--surface-3);color:var(--ink-2)}
+.tag.on{background:var(--accent-soft);color:var(--accent)}
+.tag.warn{background:var(--gold-soft);color:var(--gold)}
+.tag.bad{background:var(--danger-soft);color:var(--danger)}
+
+.notice{border-radius:11px;padding:11px 13px;font-size:12.5px;line-height:1.55;border:1px solid var(--line);
+  background:var(--surface-2);color:var(--ink-2)}
+.notice.warn{background:var(--gold-soft);border-color:transparent;color:var(--gold)}
+.notice.bad{background:var(--danger-soft);border-color:transparent;color:var(--danger)}
+
+.seg{display:flex;gap:4px;background:var(--surface-2);border:1px solid var(--line);border-radius:11px;padding:4px;
+  overflow-x:auto;scrollbar-width:none}
+.seg::-webkit-scrollbar{display:none}
+.seg button{flex:0 0 auto;border:0;background:transparent;color:var(--ink-2);border-radius:8px;padding:7px 9px;
+  font-size:12px;font-weight:600;cursor:pointer;white-space:nowrap}
+.seg button[aria-selected="true"]{background:var(--surface);color:var(--ink);box-shadow:var(--shadow)}
+
+.paper{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:13px 14px;box-shadow:var(--shadow)}
+table.led{width:100%;border-collapse:collapse;font-family:var(--font-num);font-size:12.5px;font-variant-numeric:tabular-nums}
+table.led th{font-family:var(--font-ui);font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3);
+  font-weight:700;text-align:right;padding:0 0 6px;border-bottom:1px solid var(--line)}
+table.led th:first-child{text-align:left}
+table.led td{padding:5px 0;border-bottom:1px solid var(--line-soft);text-align:right;white-space:nowrap}
+table.led td:first-child{text-align:left;white-space:normal;font-family:var(--font-ui);font-size:12.5px;padding-right:10px;width:99%}
+table.led tr.tot td{border-bottom:0;border-top:2px solid var(--ink);padding-top:7px;font-weight:600}
+table.led tr.sub td{color:var(--ink-3)}
+table.led td.ind{padding-left:14px}
+.scroll-x{overflow-x:auto;-webkit-overflow-scrolling:touch}
+
+.entry{border-bottom:1px solid var(--line-soft);padding:11px 0}
+.entry:last-child{border-bottom:0;padding-bottom:0}
+.entry:first-child{padding-top:0}
+.entry .eh{display:flex;justify-content:space-between;align-items:baseline;gap:10px;margin-bottom:6px}
+.entry .eh b{font-size:13px;font-weight:600}
+.entry .eh span{font-family:var(--font-num);font-size:10.5px;color:var(--ink-3);white-space:nowrap}
+.entry .ln{display:grid;grid-template-columns:1fr 74px 74px;font-family:var(--font-num);font-size:12px;
+  font-variant-numeric:tabular-nums;padding:1.5px 0}
+.entry .ln span:nth-child(2),.entry .ln span:nth-child(3){text-align:right}
+.entry .ln.cr span:first-child{padding-left:18px;color:var(--ink-2)}
+.entry .why{margin:7px 0 0;font-size:11.5px;line-height:1.5;color:var(--ink-2);border-left:2px solid var(--accent);padding-left:9px}
+
+.tacct{border:1px solid var(--line);border-radius:11px;overflow:hidden;background:var(--surface-2)}
+.tacct .th{padding:8px 11px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:baseline;
+  gap:8px;background:var(--surface)}
+.tacct .th b{font-size:12.5px;font-weight:600}
+.tacct .th span{font-family:var(--font-num);font-size:11px;color:var(--ink-3)}
+.tacct .tb{display:grid;grid-template-columns:1fr 1fr}
+.tacct .tb div{padding:8px 11px;font-family:var(--font-num);font-size:12.5px;font-variant-numeric:tabular-nums}
+.tacct .tb div:first-child{border-right:1px solid var(--line)}
+.tacct .tb i{display:block;font-style:normal;font-family:var(--font-ui);font-size:9px;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--ink-3);font-weight:700;margin-bottom:2px}
+.tgrid{display:flex;flex-direction:column;gap:9px}
+
+.code{width:100%;min-height:130px;font-family:var(--font-num);font-size:11px;line-height:1.5;padding:10px;
+  border-radius:10px;border:1px solid var(--line);background:var(--surface-2);color:var(--ink);
+  resize:vertical;word-break:break-all;-webkit-user-select:text;user-select:text}
+.check{display:flex;align-items:center;gap:8px;font-size:12px;font-weight:600;padding:9px 12px;border-radius:10px;
+  background:var(--accent-soft);color:var(--accent)}
+.check.bad{background:var(--danger-soft);color:var(--danger)}
+
+.concept{border:1px solid var(--line);border-radius:11px;overflow:hidden}
+.concept summary{padding:11px 13px;cursor:pointer;font-weight:600;font-size:13.5px;background:var(--surface-2);
+  list-style:none;display:flex;justify-content:space-between;gap:10px}
+.concept summary::-webkit-details-marker{display:none}
+.concept summary::after{content:"+";color:var(--ink-3);font-family:var(--font-num)}
+.concept[open] summary::after{content:"−"}
+.concept .cbody{padding:12px 13px;font-size:12.5px;line-height:1.6;color:var(--ink-2)}
+.concept .cbody code{font-family:var(--font-num);font-size:11.5px;background:var(--surface-2);padding:1px 5px;border-radius:4px;color:var(--ink)}
+
+.stage{display:grid;grid-template-columns:26px 1fr;gap:11px;padding:12px 13px;border:1px solid var(--line);
+  border-radius:11px;background:var(--surface-2)}
+.stage.done{background:transparent;opacity:.72}
+.stage.next{border-color:var(--gold);background:var(--surface)}
+.stage .no{font-family:var(--font-num);font-size:12px;font-weight:600;color:var(--ink-3);width:26px;height:26px;
+  border-radius:50%;border:1px solid var(--line);display:flex;align-items:center;justify-content:center}
+.stage.done .no{background:var(--accent);color:var(--accent-ink);border-color:transparent}
+.stage.next .no{border-color:var(--gold);color:var(--gold)}
+.stage .info b{display:block;font-family:var(--font-dis);font-weight:700;font-size:15px}
+.stage .info p{margin:2px 0 0;font-size:12px;color:var(--ink-3);line-height:1.5}
+.stage .cost{font-family:var(--font-num);font-size:13px;font-weight:600;margin-top:7px;display:block}
+
+/* crew */
+.person{border:1px solid var(--line);border-radius:11px;background:var(--surface-2);overflow:hidden}
+.person .ph{display:grid;grid-template-columns:1fr auto;gap:10px;align-items:start;padding:11px 13px}
+.person .ph b{font-size:14px;font-weight:600;display:block}
+.person .ph span{font-size:11.5px;color:var(--ink-3);display:block;line-height:1.45}
+.person .pb{padding:0 13px 12px;display:flex;flex-direction:column;gap:8px}
+.bar{height:6px;border-radius:99px;background:var(--surface-3);overflow:hidden}
+.bar i{display:block;height:100%;background:var(--accent);border-radius:99px;transition:width .4s ease}
+.bar.gold i{background:var(--gold)}
+.kv{display:flex;justify-content:space-between;flex-wrap:wrap;gap:2px 10px;font-size:11.5px;color:var(--ink-3);
+  font-family:var(--font-num);font-variant-numeric:tabular-nums;line-height:1.4}
+.kv>span{white-space:nowrap}
+.kv b{color:var(--ink);font-weight:600}
+
+.tabs{position:fixed;bottom:0;left:0;right:0;z-index:40;display:flex;justify-content:center;background:var(--surface);
+  border-top:1px solid var(--line);padding:6px 6px calc(env(safe-area-inset-bottom,0px) + 6px)}
+.tabs .inner{display:grid;grid-template-columns:repeat(5,1fr);gap:2px;width:100%;max-width:560px}
+.tabs button{position:relative;border:0;background:transparent;padding:7px 2px 5px;border-radius:10px;cursor:pointer;
+  display:flex;flex-direction:column;align-items:center;gap:3px;color:var(--ink-3);font-weight:600;font-size:10px}
+.tabs button[aria-selected="true"]{color:var(--accent);background:var(--accent-soft)}
+.tabs svg{width:19px;height:19px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+.dot{position:absolute;top:5px;left:calc(50% + 7px);width:6px;height:6px;border-radius:50%;background:var(--danger);
+  box-shadow:0 0 0 2px var(--surface)}
+
+.toasts{position:fixed;left:0;right:0;bottom:calc(env(safe-area-inset-bottom,0px) + 76px);z-index:50;display:flex;
+  flex-direction:column;align-items:center;gap:6px;pointer-events:none;padding:0 14px}
+.toast{background:var(--ink);color:var(--bg);border-radius:10px;padding:8px 12px;font-size:12px;font-family:var(--font-num);
+  box-shadow:var(--shadow-lift);animation:rise .28s ease both;max-width:100%}
+@keyframes rise{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.toast.fade{animation:sink .3s ease both}
+@keyframes sink{to{opacity:0;transform:translateY(-6px)}}
+
+.scrim{position:fixed;inset:0;z-index:60;background:rgba(4,24,22,.55);backdrop-filter:blur(3px);display:flex;
+  align-items:flex-end;justify-content:center;padding:14px}
+.sheet{background:var(--surface);border:1px solid var(--line);border-radius:18px;width:100%;max-width:520px;max-height:84vh;
+  overflow-y:auto;box-shadow:var(--shadow-lift);padding:18px 17px calc(env(safe-area-inset-bottom,0px) + 18px);
+  animation:rise .3s ease both;display:flex;flex-direction:column;gap:13px}
+.sheet h2{margin:0;font-family:var(--font-dis);font-weight:900;font-size:21px;letter-spacing:-.015em;text-wrap:balance}
+.sheet .lede{margin:0;font-size:13.5px;line-height:1.6;color:var(--ink-2)}
+
+@media (prefers-reduced-motion:reduce){*{animation-duration:.001ms !important;transition-duration:.001ms !important}}
+.sway{transform-origin:112px 176px;animation:sway 7s ease-in-out infinite}
+@keyframes sway{0%,100%{transform:rotate(-1.1deg)}50%{transform:rotate(1.6deg)}}
+.wave{animation:drift 9s ease-in-out infinite}
+.wave.b{animation-duration:12s;animation-direction:reverse}
+@keyframes drift{0%,100%{transform:translateX(-5px)}50%{transform:translateX(5px)}}
+.flick{animation:flick 1.1s ease-in-out infinite}
+.flick.b{animation-delay:.45s}
+@keyframes flick{0%,100%{transform:scaleY(1) translateY(0);opacity:.95}50%{transform:scaleY(1.22) translateY(-1.5px);opacity:1}}
+.bob{animation:bob 2.4s ease-in-out infinite}
+.bob.b{animation-delay:.6s}.bob.c{animation-delay:1.2s}.bob.d{animation-delay:1.8s}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-1.6px)}}
+.ghost{opacity:.2}
+</style>
+
+<div class="shell">
+  <div class="status">
+    <div class="brand"><b>Ledger Island</b><span id="dayLabel">Day 1</span></div>
+    <div class="stats" id="stats"></div>
+  </div>
+  <div class="scene" id="scene"></div>
+  <main id="main">
+    <!-- Replaced by render() the moment scripts run. If you can still read this,
+         the page was opened somewhere that does not execute JavaScript. -->
+    <section class="card"><header><h2>This page needs JavaScript</h2></header><div class="body">
+      <p class="sub">The island, the ledger and every button on this page are drawn by script, so a viewer that only
+      displays HTML shows you this instead.</p>
+      <p class="sub">You are most likely looking at a file preview — inside a chat app, a mail client, or the Files
+      app. Those render the markup but block the code.</p>
+      <p class="sub"><b>To play it:</b> open this page in a real browser. Tap the share button and choose
+      <b>Open in Safari</b> or <b>Save to Files</b> and open it from there — or, if this is a file you are hosting,
+      visit its address rather than opening the file itself.</p>
+    </div></section>
+  </main>
+  <nav class="tabs"><div class="inner" id="tabbar"></div></nav>
+</div>
+<div class="toasts" id="toasts"></div>
+<div id="modalHost"></div>
+
+<script>
+/* =====================================================================
+   LEDGER ISLAND v2 — an idle island business where every action is a
+   double-entry journal entry. All money is integer CENTS.
+   ===================================================================== */
+
+const DAY_MS = 24 * 60 * 60 * 1000;
+const SAVE_KEY = 'ledger-island-v1';
+const MAX_JOURNAL = 200;
+
+const ACCOUNTS = {
+  '1000': { name:'Cash',                            type:'A',  normal:'D' },
+  '1100': { name:'Prepaid Food',                    type:'A',  normal:'D' },
+  '1200': { name:'Equipment',                       type:'A',  normal:'D' },
+  '1210': { name:'Accum. Depreciation — Equipment', type:'XA', normal:'C' },
+  '1300': { name:'Construction in Progress',        type:'A',  normal:'D' },
+  '1400': { name:'House',                           type:'A',  normal:'D' },
+  '1410': { name:'Accum. Depreciation — House',     type:'XA', normal:'C' },
+  '2000': { name:'Accounts Payable',                type:'L',  normal:'C' },
+  '2050': { name:'Wages Payable',                   type:'L',  normal:'C' },
+  '2100': { name:'Loan Payable',                    type:'L',  normal:'C' },
+  '2200': { name:'Interest Payable',                type:'L',  normal:'C' },
+  '3000': { name:"Owner's Capital",                 type:'E',  normal:'C' },
+  '4000': { name:'Labour Revenue',                  type:'R',  normal:'C' },
+  '4100': { name:'Tourism Revenue',                 type:'R',  normal:'C' },
+  '4200': { name:'Craft Revenue',                   type:'R',  normal:'C' },
+  '5000': { name:'Food Expense',                    type:'X',  normal:'D' },
+  '5100': { name:'Depreciation Expense',            type:'X',  normal:'D' },
+  '5200': { name:'Interest Expense',                type:'X',  normal:'D' },
+  '5400': { name:'Wages Expense',                   type:'X',  normal:'D' },
+  '5500': { name:'Contract Labour',                 type:'X',  normal:'D' },
+};
+const CODES = Object.keys(ACCOUNTS);
+
+/* ---------- economy ---------- */
+const FOOD_DAY = 7500;            // one person-day of food
+const FOOD_BULK = 6857;           // per person-day when buying 7 or more
+const EMERGENCY_FOOD = 11000;
+const LOAN_AMOUNT = 100000;
+const AP_BASE_TERMS = 5;
+const AP_RATE = 0.02;
+const STAFF_EFF = 0.09;           // staff work far slower than a player tapping flat out
+const SHIFT_CAP_MIN = 480;        // an employee works at most 8 hours a day
+const BASE_WAGE = 22000;          // $220/day asking wage at skill 1.0
+const BASE_SHARE = 0.55;          // contractor's asking share of each delivery
+
+/* `hands` is how well the work delegates. Skilled work delegates badly. */
+const JOBS = [
+  { id:'coconut', name:'Harvest coconuts',  hint:'Roadside stall · 10s', pay:250,   cd:10000,  rev:'4000',
+    memo:'Sold coconuts at the roadside stall', unit:'loads',   hands:1.0 },
+  { id:'fish',    name:'Catch fish',        hint:'Reef shallows · 25s',  pay:900,   cd:25000,  rev:'4000',
+    memo:'Sold the morning catch', unit:'catches',              hands:0.8 },
+  { id:'tour',    name:'Guide tourists',    hint:'Reef walk · 60s',      pay:4000,  cd:60000,  rev:'4100',
+    memo:'Guided a walking tour of the reef', unit:'tours',     hands:0.55 },
+  { id:'carve',   name:'Carve & sell teak', hint:'Workshop · 2m',        pay:12000, cd:120000, rev:'4200',
+    memo:'Sold a carved teak panel', unit:'panels',             hands:0.45 },
+];
+const JOB = id => JOBS.find(j => j.id === id);
+
+/* Tool tracks. Buying a tier raises what every action on that job pays. */
+const TOOLS = {
+  coconut: { label:'Coconut harvesting', unlockTier:0, tiers:[
+    { name:'Climbing harness', cost:20000,  life:40,  mult:1.7, blurb:'Reach the high nuts instead of the windfalls.' },
+    { name:'Hand cart',        cost:65000,  life:70,  mult:2.6, blurb:'Carry a whole tree down in one trip.' },
+    { name:'Coconut press',    cost:180000, life:140, mult:4.0, blurb:'Sell oil and copra, not just nuts.' },
+  ]},
+  fish: { label:'Fishing', unlockTier:1, tiers:[
+    { name:'Fishing net',     cost:15000,  life:30,  mult:1.0, blurb:'Unlocks fishing from the shallows.' },
+    { name:'Outrigger canoe', cost:90000,  life:90,  mult:1.9, blurb:'Fish the outer reef where the big ones are.' },
+    { name:'Trap line',       cost:240000, life:150, mult:3.0, blurb:'Twenty traps working while you sleep.' },
+  ]},
+  tour: { label:'Tours', unlockTier:0, tiers:[
+    { name:'Reef map & guidebook', cost:70000,  life:60, mult:1.5, blurb:'Charge for expertise, not just company.' },
+    { name:'Snorkel kit',          cost:200000, life:90, mult:2.3, blurb:'Ten sets of gear turns a walk into an excursion.' },
+  ]},
+  carve: { label:'Teak carving', unlockTier:1, tiers:[
+    { name:'Carving tools',   cost:45000,  life:60,  mult:1.0, blurb:'Unlocks carving and selling teak.' },
+    { name:'Lathe & chisels', cost:260000, life:120, mult:2.0, blurb:'Turn bowls and posts, not just flat panels.' },
+  ]},
+};
+
+const STAGES = [
+  { name:'Stilts & foundation', cost:60000,  desc:'Ironwood posts sunk into the sand, above the tide line.' },
+  { name:'Bamboo frame',        cost:90000,  desc:'Corner posts, top plate and roof beams lashed with coir.' },
+  { name:'Palm thatch roof',    cost:130000, desc:'Woven nipa palm, four courses deep. Unlocks guiding tourists.' },
+  { name:'Walls & shutters',    cost:180000, desc:'Split bamboo walls with louvered shutters for the trade wind.' },
+  { name:'Veranda & hammock',   cost:240000, desc:'A wraparound deck facing the lagoon, and somewhere to sleep.' },
+  { name:'Garden & torches',    cost:300000, desc:'Frangipani, banana palms, and torches lit at dusk.' },
+];
+const HOUSE_LIFE = 365;
+
+const FIRST = ['Maleo','Talia','Ravi','Sina','Dewi','Kai','Nawa','Ilo','Sefa','Bayu','Mira','Teuku','Lani','Joro','Anuk','Pua'];
+const LAST  = ['Rangi','Halim','Vaea','Suto','Manu','Ade','Tui','Kwan','Osei','Fale','Rua','Bakti'];
+
+/* ---------- state ---------- */
+let S = null;
+let uiTab = 'island', booksTab = 'journal', crewTab = 'roster';
+
+function blankState(now) {
+  return {
+    v: 2, day: 1, startedAt: now, lastCloseAt: now, hunger: 0,
+    prepaidDays: 1, prepaidCents: FOOD_DAY,
+    tools: { coconut:0, fish:0, tour:0, carve:0 },
+    equip: [],
+    staff: [], market: null, nextId: 1,
+    stage: 0, cip: 0, houseCost: 0, houseAccum: 0, houseDone: false,
+    ap: [], loan: 0, collapses: 0,
+    entryNo: 0, journal: [], bal: {}, today: {},
+    cool: {}, seenIntro: false, reports: [], savedAt: now,
+  };
+}
+
+function migrate(o) {
+  if (!o || !o.v) return null;
+  if (o.v === 1) {
+    o.v = 2;
+    o.tools = { coconut:0, fish:(o.gear && o.gear.net) ? 1 : 0, tour:0, carve:(o.gear && o.gear.tools) ? 1 : 0 };
+    o.equip = [];
+    if (o.gear) {
+      if (o.gear.net)   o.equip.push({ name:'Fishing net',   cost:o.gear.net.cost,   life:o.gear.net.life,   accum:o.gear.net.accum });
+      if (o.gear.tools) o.equip.push({ name:'Carving tools', cost:o.gear.tools.cost, life:o.gear.tools.life, accum:o.gear.tools.accum });
+    }
+    delete o.gear;
+    o.staff = []; o.market = null; o.nextId = 1;
+  }
+  return o.v === 2 ? o : null;
+}
+
+function bal(code) { return S.bal[code] || (S.bal[code] = { d:0, c:0 }); }
+function todayBal(code) { return S.today[code] || (S.today[code] = { d:0, c:0 }); }
+function net(code) { const b = bal(code); return ACCOUNTS[code].normal === 'D' ? b.d - b.c : b.c - b.d; }
+function netToday(code) { const b = todayBal(code); return ACCOUNTS[code].normal === 'D' ? b.d - b.c : b.c - b.d; }
+const cash = () => net('1000');
+
+function post(memo, lines, why) {
+  let dr = 0, cr = 0;
+  for (const [, d, c] of lines) { dr += d || 0; cr += c || 0; }
+  if (dr !== cr) { console.error('UNBALANCED', memo, lines, dr, cr); return null; }
+  for (const [code, d, c] of lines) {
+    const b = bal(code), t = todayBal(code);
+    b.d += d || 0; b.c += c || 0; t.d += d || 0; t.c += c || 0;
+  }
+  S.entryNo += 1;
+  S.journal.unshift({ n:S.entryNo, day:S.day, memo, why, lines });
+  if (S.journal.length > MAX_JOURNAL) S.journal.length = MAX_JOURNAL;
+}
+
+const nf = new Intl.NumberFormat('en-US', { minimumFractionDigits:2, maximumFractionDigits:2 });
+const money = c => '$' + nf.format((c || 0) / 100);
+const moneyShort = c => {
+  const v = (c || 0) / 100;
+  return Math.abs(v) >= 10000 ? '$' + Math.round(v).toLocaleString('en-US') : '$' + nf.format(v);
+};
+const esc = s => String(s).replace(/[&<>"]/g, m => ({ '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;' }[m]));
+const rnd = (a, b) => a + Math.random() * (b - a);
+const pick = a => a[Math.floor(Math.random() * a.length)];
+
+/* =====================================================================
+   DERIVED RULES — tools, status, crew
+   ===================================================================== */
+
+/* What one action on this job pays, after tools and house status. */
+function toolMult(jobId) {
+  const t = TOOLS[jobId]; const owned = S.tools[jobId] || 0;
+  return owned > 0 ? t.tiers[owned - 1].mult : 1;
+}
+function statusMult(jobId) {
+  return jobId === 'tour' ? 1 + 0.15 * Math.max(0, S.stage - 2) : 1;
+}
+function jobPay(jobId) {
+  return Math.round(JOB(jobId).pay * toolMult(jobId) * statusMult(jobId));
+}
+function jobUnlocked(jobId) {
+  if (jobId === 'tour') return S.stage >= 3;
+  const t = TOOLS[jobId];
+  return (S.tools[jobId] || 0) >= t.unlockTier;
+}
+function jobLockReason(jobId) {
+  if (jobId === 'tour') return 'Build the palm thatch roof (stage 3)';
+  return 'Buy the ' + TOOLS[jobId].tiers[0].name.toLowerCase() + ' in the Market';
+}
+
+/* House status buys terms, not money. Nothing is ever posted for it. */
+const apTerms   = () => AP_BASE_TERMS + S.stage;
+const loanRate  = () => Math.max(0.004, 0.01 - 0.001 * Math.max(0, S.stage - 2));
+const crewCap   = () => 1 + Math.floor(S.stage / 2);
+const employees = () => S.staff.filter(p => p.kind === 'employee');
+const mouths    = () => 1 + employees().length;
+const foodCover = () => Math.floor(S.prepaidDays / mouths());
+
+/* Seconds a crew member needs per task on a job. */
+function secPerTask(p, jobId) {
+  const j = JOB(jobId);
+  return (j.cd / 1000) / (STAFF_EFF * p.skill * j.hands);
+}
+function ratePerMin(p, jobId) {
+  return Math.round(jobPay(jobId) * 60 / secPerTask(p, jobId));
+}
+function dailyCost(p) { return p.kind === 'employee' ? p.wage + FOOD_DAY : 0; }
+
+/* =====================================================================
+   PLAYER ACTIONS
+   ===================================================================== */
+
+function doJob(jobId) {
+  const j = JOB(jobId);
+  if (Date.now() < (S.cool[jobId] || 0)) return;
+  const pay = jobPay(jobId);
+  const mult = toolMult(jobId) * statusMult(jobId);
+  post(j.memo, [['1000', pay, 0], [j.rev, 0, pay]],
+    mult > 1
+      ? 'Cash comes in, so Cash is debited, and the value you created is credited to revenue. Your tools and standing lift this from ' + money(j.pay) + ' to ' + money(pay) + ' — the same work, better equipped.'
+      : 'Cash comes in, so Cash is debited. The value you created is income, and revenue is credited because it increases your equity.');
+  S.cool[jobId] = Date.now() + j.cd;
+  toast('<b>' + money(pay) + '</b>  Dr Cash · Cr ' + ACCOUNTS[j.rev].name);
+  commit();
+}
+
+function buyFoodUnits(units) {
+  const per = units >= 7 ? FOOD_BULK : FOOD_DAY;
+  const price = per * units;
+  if (cash() < price) return toast('Not enough cash for that.');
+  post('Bought ' + units + ' person-day' + (units === 1 ? '' : 's') + ' of food',
+    [['1100', price, 0], ['1000', 0, price]],
+    'Paying for food does not make it an expense yet. You swapped one asset for another — cash became Prepaid Food. It only becomes an expense on the day it is eaten, by you or by your crew.');
+  S.prepaidDays += units; S.prepaidCents += price;
+  toast('<b>' + units + ' person-days</b>  Dr Prepaid Food · Cr Cash');
+  commit();
+}
+
+function buyTool(track) {
+  const t = TOOLS[track], owned = S.tools[track] || 0;
+  if (owned >= t.tiers.length) return;
+  const tier = t.tiers[owned];
+  if (cash() < tier.cost) return toast('Not enough cash for that.');
+  const before = toolMult(track);
+  post('Bought ' + tier.name.toLowerCase(), [['1200', tier.cost, 0], ['1000', 0, tier.cost]],
+    'A ' + tier.name.toLowerCase() + ' earns money for months, so it is capitalised as an asset rather than expensed today. It reaches the income statement slowly, through depreciation — while raising what every ' + t.label.toLowerCase() + ' action pays from ' + before.toFixed(1) + '× to ' + tier.mult.toFixed(1) + '×.');
+  S.equip.push({ name:tier.name, cost:tier.cost, life:tier.life, accum:0 });
+  S.tools[track] = owned + 1;
+  toast('<b>' + tier.name + '</b>  yield now ' + tier.mult.toFixed(1) + '×');
+  commit();
+}
+
+function buildStage(onCredit) {
+  if (S.stage >= STAGES.length) return;
+  const st = STAGES[S.stage];
+  if (!onCredit && cash() < st.cost) return toast('Not enough cash. Try buying on account.');
+  if (onCredit) {
+    post('Materials for ' + st.name.toLowerCase() + ' — on account',
+      [['1300', st.cost, 0], ['2000', 0, st.cost]],
+      'You took the materials now and will pay later. The asset under construction rises, and so does a liability: Accounts Payable, due in ' + apTerms() + ' days on your current standing.');
+    S.ap.push({ id:'ap' + (S.nextId++), cents:st.cost, dueDay:S.day + apTerms(), memo:st.name });
+  } else {
+    post('Materials for ' + st.name.toLowerCase(), [['1300', st.cost, 0], ['1000', 0, st.cost]],
+      'Building materials become part of an asset under construction, not an expense. Your wealth did not fall — it changed shape, from cash into a half-built house.');
+  }
+  S.cip += st.cost; S.stage += 1;
+  toast('<b>' + st.name + '</b> built');
+  const gained = [];
+  if (S.stage === 3) gained.push('guiding tourists is now open');
+  if (S.stage % 2 === 0) gained.push('you can keep ' + crewCap() + ' on the crew');
+  gained.push('supplier terms are now ' + apTerms() + ' days');
+  if (gained.length) toast(gained.join(' · '));
+
+  if (S.stage >= STAGES.length) {
+    post('House completed — transferred from construction', [['1400', S.cip, 0], ['1300', 0, S.cip]],
+      'Construction is finished, so the accumulated cost moves out of Construction in Progress and into House. From today it is in use, so it starts to depreciate.');
+    S.houseCost = S.cip; S.cip = 0; S.houseDone = true;
+    openSheet('The house is finished',
+      '<p class="lede">Every plank, post and palm frond is now in one account: <b>House, ' + money(S.houseCost) + '</b>. Not one cent of it was ever an expense.</p>' +
+      '<p class="lede">From tomorrow it depreciates about ' + money(Math.round(S.houseCost / HOUSE_LIFE)) + ' a day over ' + HOUSE_LIFE + ' days. And the standing it earns you — better visitors, ' + apTerms() + '-day terms, a crew of ' + crewCap() + ' — is worth real money but appears <b>nowhere</b> in your books. Reputation is not an asset you can post.</p>',
+      'Step onto the veranda');
+  }
+  commit();
+}
+
+function payAp(id) {
+  const i = S.ap.findIndex(a => a.id === id); if (i < 0) return;
+  const a = S.ap[i];
+  if (cash() < a.cents) return toast('Not enough cash to settle that.');
+  post('Paid supplier — ' + a.memo.toLowerCase(), [['2000', a.cents, 0], ['1000', 0, a.cents]],
+    'Paying a supplier is not an expense. The asset and the debt were both recorded when you took the materials; this only settles the debt. Assets and liabilities fall together.');
+  S.ap.splice(i, 1);
+  toast('<b>Settled</b>  Dr Accounts Payable · Cr Cash');
+  commit();
+}
+
+function payWages() {
+  const owed = net('2050');
+  if (owed <= 0) return;
+  const amt = Math.min(owed, cash());
+  if (amt <= 0) return toast('No cash to pay wages with.');
+  post('Paid wages to the crew', [['2050', amt, 0], ['1000', 0, amt]],
+    'The wage was expensed on each day your crew was on the books, whether they worked or not. Paying it now only clears the liability — it changes cash, not profit.');
+  toast('<b>' + money(amt) + '</b>  Dr Wages Payable · Cr Cash');
+  commit();
+}
+
+function repayLoan() {
+  if (!S.loan) return;
+  const amt = Math.min(S.loan, cash());
+  if (amt <= 0) return toast('No cash to repay with.');
+  post('Repaid part of the neighbour loan', [['2100', amt, 0], ['1000', 0, amt]],
+    'Repaying a loan is not an expense — only the interest is. This shrinks both sides of the balance sheet: less cash, less debt.');
+  S.loan -= amt;
+  toast('<b>' + money(amt) + '</b>  Dr Loan Payable · Cr Cash');
+  commit();
+}
+
+function payInterest() {
+  const owed = net('2200'); if (owed <= 0) return;
+  const amt = Math.min(owed, cash());
+  if (amt <= 0) return toast('No cash to pay interest with.');
+  post('Paid accrued interest', [['2200', amt, 0], ['1000', 0, amt]],
+    'The interest was already expensed on the days it built up. Paying it now just clears the liability.');
+  toast('<b>' + money(amt) + '</b>  Dr Interest Payable · Cr Cash');
+  commit();
+}
+
+/* =====================================================================
+   THE CREW
+   ===================================================================== */
+
+/* Labour gets dearer as the island gets richer — your tools and standing are
+   visible to everyone you try to hire. */
+function wageIndex() {
+  const tiers = Object.keys(TOOLS).reduce((s, k) => s + (S.tools[k] || 0), 0);
+  return 1 + 0.10 * tiers + 0.05 * S.stage;
+}
+const marketWage = skill => Math.round(BASE_WAGE * skill * wageIndex() / 100) * 100;
+
+function newCandidate() {
+  const kind = Math.random() < 0.5 ? 'employee' : 'contractor';
+  /* A better house attracts better people. */
+  const lift = 1 + 0.05 * S.stage;
+  const skill = Math.min(1.9, Math.round(rnd(0.8, 1.15) * lift * 100) / 100);
+  const c = { id:'c' + (S.nextId++), name:pick(FIRST) + ' ' + pick(LAST), kind, skill, tries:0 };
+  if (kind === 'employee') { c.ask = Math.round(marketWage(skill) * rnd(0.9, 1.12) / 100) * 100; c.origAsk = c.ask; }
+  else { c.share = Math.min(0.75, Math.round(BASE_SHARE * rnd(0.92, 1.12) * 100) / 100); c.origShare = c.share; }
+  return c;
+}
+
+/* How likely this employee is to walk at the next day close. Shown in the UI,
+   so squeezing the rate is a visible trade rather than a hidden punishment. */
+function quitChance(p) {
+  if (p.kind !== 'employee') return 0;
+  let q = 0.03;
+  if (p.strikes >= 2) return 1;
+  if (p.strikes === 1) q += 0.20;
+  const wageBill = employees().reduce((s, x) => s + x.wage, 0) || p.wage;
+  if (net('2050') > wageBill * 3) q += 0.12;
+  const ratio = p.askedWage ? p.wage / p.askedWage : 1;
+  if (ratio >= 1) q -= 0.02; else if (ratio >= 0.85) q += 0.03; else q += 0.09;
+  q += 0.07 * (p.refused || 0);
+  if (p.raiseAsk) q += 0.05;
+  return Math.max(0.01, Math.min(0.85, q));
+}
+/* Expected tenure in days, for the hiring preview. */
+const tenure = q => Math.max(1, Math.round(1 / q));
+function refreshMarket(force) {
+  if (!force && S.market && S.market.day === S.day) return;
+  const n = 2 + (S.stage >= 3 ? 1 : 0);
+  S.market = { day:S.day, list: Array.from({ length:n }, newCandidate) };
+}
+
+/* Negotiation: counter below the asking rate and risk them walking. */
+function negotiate(id, cutPct) {
+  const c = S.market.list.find(x => x.id === id); if (!c) return;
+  if (S.staff.length >= crewCap()) return toast('Your crew is full. Build more house first.');
+
+  const chance = ({ 0:1, 10:0.82, 20:0.52, 30:0.22 })[cutPct] + 0.04 * S.stage;
+  const accepted = Math.random() < chance;
+  if (accepted) {
+    if (c.kind === 'employee') c.ask = Math.round(c.ask * (1 - cutPct / 100) / 100) * 100;
+    else c.share = Math.round(c.share * (1 - cutPct / 100) * 100) / 100;
+    hire(c);
+    return;
+  }
+  c.tries += 1;
+  if (Math.random() < 0.55 && c.tries < 3) {
+    const half = cutPct / 2;
+    if (c.kind === 'employee') c.ask = Math.round(c.ask * (1 - half / 100) / 100) * 100;
+    else c.share = Math.round(c.share * (1 - half / 100) * 100) / 100;
+    toast('<b>' + c.name.split(' ')[0] + '</b> counters: ' +
+      (c.kind === 'employee' ? money(c.ask) + '/day' : Math.round(c.share * 100) + '% a delivery'));
+  } else {
+    S.market.list = S.market.list.filter(x => x.id !== c.id);
+    toast('<b>' + c.name.split(' ')[0] + '</b> walked away');
+  }
+  commit();
+}
+
+function hire(c) {
+  if (S.staff.length >= crewCap()) return toast('Your crew is full.');
+  const p = {
+    id:'p' + (S.nextId++), name:c.name, kind:c.kind, skill:c.skill,
+    wage: c.kind === 'employee' ? c.ask : 0,
+    askedWage: c.kind === 'employee' ? (c.origAsk || c.ask) : 0,
+    share: c.kind === 'contractor' ? c.share : 0,
+    job:null, endsAt:0, settledUntil:0, tasksLeft:0, tasksDone:0, feeAccrued:0,
+    minsToday:0, strikes:0, refused:0, raiseAsk:0, hiredDay:S.day,
+  };
+  S.staff.push(p);
+  S.market.list = S.market.list.filter(x => x.id !== c.id);
+  if (c.kind === 'employee') {
+    openSheet('You hired ' + p.name,
+      '<p class="lede">On the books at <b>' + money(p.wage) + ' a day</b>, skill ' + p.skill.toFixed(2) + '×. That wage is now a <b>fixed cost</b>: it is expensed every single day, whether you give them a shift or not, and it accrues into Wages Payable until you pay it.</p>' +
+      '<p class="lede">They also eat. Your larder now feeds <b>' + mouths() + ' mouths</b> a day instead of ' + (mouths() - 1) + '. Go short and they take it personally.</p>' +
+      '<p class="lede">Nothing is posted for hiring itself — a signature is not a transaction.</p>', 'Put them to work');
+  } else {
+    openSheet('You engaged ' + p.name,
+      '<p class="lede">Taking <b>' + Math.round(p.share * 100) + '% of every delivery</b>, skill ' + p.skill.toFixed(2) + '×. Nothing is owed until they actually produce, and nothing is owed between batches — this is a <b>variable cost</b>.</p>' +
+      '<p class="lede">They feed themselves, they never quit mid-batch, and the invoice lands as Accounts Payable when the batch is done.</p>', 'Assign a batch');
+  }
+  commit();
+}
+
+function assignShift(pid, jobId, minutes) {
+  const p = S.staff.find(x => x.id === pid); if (!p) return;
+  if (!jobUnlocked(jobId)) return toast('That work is not open yet.');
+  const now = Date.now();
+  const left = Math.max(0, SHIFT_CAP_MIN - p.minsToday);
+  if (left <= 0) return toast(p.name.split(' ')[0] + ' has worked a full day.');
+  const mins = Math.min(minutes, left);
+  p.job = jobId; p.settledUntil = now; p.endsAt = now + mins * 60000;
+  toast('<b>' + p.name.split(' ')[0] + '</b> on ' + JOB(jobId).name.toLowerCase() + ' for ' + mins + 'm');
+  commit();
+}
+
+function assignBatch(pid, jobId, tasks) {
+  const p = S.staff.find(x => x.id === pid); if (!p) return;
+  if (!jobUnlocked(jobId)) return toast('That work is not open yet.');
+  p.job = jobId; p.settledUntil = Date.now(); p.tasksLeft = tasks; p.tasksDone = 0; p.feeAccrued = 0;
+  toast('<b>' + p.name.split(' ')[0] + '</b> — batch of ' + tasks + ' ' + JOB(jobId).unit);
+  commit();
+}
+
+/* Aggregate crew output into ONE journal entry per settlement. */
+function settleStaff(upTo) {
+  for (const p of S.staff) {
+    if (!p.job) continue;
+    const j = JOB(p.job);
+    const sptMs = secPerTask(p, p.job) * 1000;
+    let until = upTo;
+    if (p.kind === 'employee') until = Math.min(upTo, p.endsAt);
+    if (until <= p.settledUntil) { finishIfDone(p, upTo); continue; }
+
+    let tasks = Math.floor((until - p.settledUntil) / sptMs);
+    if (p.kind === 'contractor') tasks = Math.min(tasks, p.tasksLeft);
+    if (tasks > 0) {
+      const pay = jobPay(p.job);
+      const gross = tasks * pay;
+      post('Crew output — ' + p.name.split(' ')[0] + ', ' + tasks + ' ' + j.unit,
+        [['1000', gross, 0], [j.rev, 0, gross]],
+        'Work done by your crew is still your revenue — you own the output, they are paid separately for the labour. ' +
+        tasks + ' ' + j.unit + ' at ' + money(pay) + ', posted as one summary entry rather than ' + tasks + ' separate ones.');
+      p.settledUntil += tasks * sptMs;
+      if (p.kind === 'employee') p.minsToday += (tasks * sptMs) / 60000;
+      else { p.tasksLeft -= tasks; p.tasksDone += tasks; p.feeAccrued += Math.round(gross * p.share); }
+    }
+    finishIfDone(p, upTo);
+  }
+}
+
+function finishIfDone(p, now) {
+  if (p.kind === 'employee') {
+    if (p.job && now >= p.endsAt) { p.job = null; p.endsAt = 0; }
+  } else if (p.job && p.tasksLeft <= 0) {
+    invoiceContractor(p);
+  }
+}
+
+function invoiceContractor(p) {
+  const fee = p.feeAccrued;
+  if (fee > 0) {
+    post('Invoice from ' + p.name + ' — ' + p.tasksDone + ' deliveries',
+      [['5500', fee, 0], ['2000', 0, fee]],
+      'A contractor is a variable cost: nothing was owed until the work was delivered, and it is expensed the moment it is. The invoice sits in Accounts Payable, due in ' + apTerms() + ' days.');
+    S.ap.push({ id:'ap' + (S.nextId++), cents:fee, dueDay:S.day + apTerms(), memo:p.name + ' contract' });
+    toast('<b>' + p.name.split(' ')[0] + '</b> invoiced ' + money(fee));
+  }
+  p.job = null; p.tasksLeft = 0; p.feeAccrued = 0;
+  /* Contractors leave when the batch is done. */
+  S.staff = S.staff.filter(x => x.id !== p.id);
+}
+
+function endEngagement(pid) {
+  const p = S.staff.find(x => x.id === pid); if (!p) return;
+  settleStaff(Date.now());
+  const still = S.staff.find(x => x.id === pid);
+  if (still) { if (still.kind === 'contractor') invoiceContractor(still); else { still.job = null; still.endsAt = 0; } }
+  commit();
+}
+
+function answerRaise(pid, accept) {
+  const p = S.staff.find(x => x.id === pid); if (!p || !p.raiseAsk) return;
+  if (accept) {
+    const old = p.wage;
+    p.wage = p.raiseAsk; p.askedWage = p.raiseAsk; p.refused = 0;
+    toast('<b>' + p.name.split(' ')[0] + '</b> now on ' + money(p.wage) + '/day');
+    if (old !== p.wage) {
+      /* No entry: agreeing a rate changes nothing until a day is worked. */
+    }
+  } else {
+    p.refused = (p.refused || 0) + 1;
+    toast('<b>' + p.name.split(' ')[0] + '</b> took that badly');
+  }
+  p.raiseAsk = 0;
+  commit();
+}
+
+function dismiss(pid) {
+  const p = S.staff.find(x => x.id === pid); if (!p) return;
+  settleStaff(Date.now());
+  S.staff = S.staff.filter(x => x.id !== pid);
+  toast('<b>' + p.name.split(' ')[0] + '</b> left the crew');
+  commit();
+}
+
+/* =====================================================================
+   DAY CLOSE
+   ===================================================================== */
+
+function closeDay() {
+  const rep = { day:S.day, events:[], profit:0, revenue:0, expense:0 };
+  const dayRev = () => CODES.filter(c => ACCOUNTS[c].type === 'R').reduce((s, c) => s + netToday(c), 0);
+  const dayExp = () => CODES.filter(c => ACCOUNTS[c].type === 'X').reduce((s, c) => s + netToday(c), 0);
+
+  // 1. wages accrue for every employee on the books, worked or not
+  const emps = employees();
+  if (emps.length) {
+    const total = emps.reduce((s, p) => s + p.wage, 0);
+    post('Day ' + S.day + ' close — crew wages accrued',
+      [['5400', total, 0], ['2050', 0, total]],
+      'Wages are expensed on the day they are earned, not the day they are paid. ' + emps.length + ' on the books at ' + money(total) + ' a day — this lands whether you gave them a shift or not. That is what makes an employee a fixed cost.');
+    rep.events.push({ kind: emps.length ? 'ok' : 'ok', text:'Wages accrued for ' + emps.length + ' crew: ' + money(total) + '.' });
+  }
+
+  // 2. food — you and your crew both eat
+  const need = mouths();
+  const have = Math.min(S.prepaidDays, need);
+  if (have > 0) {
+    const c = have === S.prepaidDays ? S.prepaidCents : Math.round(S.prepaidCents / S.prepaidDays) * have;
+    post('Day ' + S.day + ' close — food consumed' + (need > 1 ? ' (' + have + ' of ' + need + ' mouths)' : ''),
+      [['5000', c, 0], ['1100', 0, c]],
+      'Now the food is actually eaten. Prepaid Food falls and Food Expense rises. This — not the day you paid — is the day it hits your profit.');
+    S.prepaidDays -= have;
+    S.prepaidCents = Math.max(0, S.prepaidCents - c);
+    if (S.prepaidDays <= 0) { S.prepaidDays = 0; S.prepaidCents = 0; }
+  }
+  if (have >= 1) { S.hunger = 0; } else { S.hunger += 1; }
+
+  const unfed = need - have;
+  if (unfed > 0 && emps.length) {
+    // you eat first; the shortfall falls on the crew
+    const hungry = emps.slice(0, Math.min(unfed, emps.length));
+    for (const p of hungry) p.strikes += 1;
+    rep.events.push({ kind:'bad', text:hungry.length + ' of your crew went unfed. Two strikes and they walk.' });
+  }
+  if (have < 1) {
+    rep.events.push({ kind: S.hunger >= 2 ? 'bad' : 'warn',
+      text:'No food for you. Day ' + S.hunger + ' of 3 without eating. Nothing is posted — hunger is not a transaction.' });
+  } else if (need > 1) {
+    rep.events.push({ kind:'ok', text:'Fed ' + have + ' of ' + need + ' mouths.' });
+  }
+
+  // 3. depreciation on equipment
+  for (const g of S.equip) {
+    const remaining = g.cost - g.accum;
+    if (remaining <= 0) continue;
+    const amt = Math.min(Math.round(g.cost / g.life), remaining);
+    if (amt <= 0) continue;
+    post('Depreciation — ' + g.name.toLowerCase(), [['5100', amt, 0], ['1210', 0, amt]],
+      'The ' + g.name.toLowerCase() + ' is one day older. Depreciation spreads its cost across its useful life: an expense today, and a contra-asset that quietly lowers its book value. No cash moves.');
+    g.accum += amt;
+  }
+
+  // 4. depreciation on the house
+  if (S.houseDone && S.houseCost - S.houseAccum > 0) {
+    const amt = Math.min(Math.round(S.houseCost / HOUSE_LIFE), S.houseCost - S.houseAccum);
+    post('Depreciation — house', [['5100', amt, 0], ['1410', 0, amt]],
+      'Even a finished house wears out. A slice of its cost becomes an expense each day, over ' + HOUSE_LIFE + ' days — without any cash leaving your hands.');
+    S.houseAccum += amt;
+  }
+
+  // 5. interest
+  if (S.loan > 0) {
+    const r = loanRate();
+    const amt = Math.max(1, Math.round(S.loan * r));
+    post('Interest accrued on the neighbour loan', [['5200', amt, 0], ['2200', 0, amt]],
+      'Interest is the cost of time, not the cost of paying. Your standing has your rate at ' + (r * 100).toFixed(1) + '% a day — a better house borrows cheaper.');
+    rep.events.push({ kind:'warn', text:'Loan interest: ' + money(amt) + ' at ' + (r * 100).toFixed(1) + '%/day.' });
+  }
+  let overdue = 0;
+  for (const a of S.ap) if (S.day > a.dueDay) overdue += a.cents;
+  if (overdue > 0) {
+    const amt = Math.max(1, Math.round(overdue * AP_RATE));
+    post('Late-payment interest on overdue accounts', [['5200', amt, 0], ['2200', 0, amt]],
+      'You are past terms on ' + money(overdue) + ' of supplier debt. Late interest is an expense now, and a liability until paid.');
+    rep.events.push({ kind:'bad', text:'Overdue supplier interest: ' + money(amt) + '.' });
+  }
+
+  rep.revenue = dayRev(); rep.expense = dayExp(); rep.profit = rep.revenue - rep.expense;
+
+  // 6. do your people stay?
+  const wagesOwed = net('2050');
+  for (const p of employees().slice()) {
+    if (Math.random() < quitChance(p)) {
+      S.staff = S.staff.filter(x => x.id !== p.id);
+      rep.events.push({ kind:'bad', text:p.name + ' quit' +
+        (p.strikes ? ' — you let them go hungry.'
+          : wagesOwed > p.wage * 3 ? ' — you owe too much in back wages.'
+          : p.refused ? ' — you turned down their last ask.'
+          : p.wage < p.askedWage * 0.85 ? ' — they never forgot what you talked them down to.' : '.') });
+    }
+  }
+
+  // 6b. someone asks for more
+  for (const p of employees()) {
+    if (p.raiseAsk) continue;
+    const going = marketWage(p.skill);
+    const behind = p.wage < going * 0.9;
+    if (S.day - p.hiredDay >= 3 && Math.random() < (behind ? 0.27 : 0.10)) {
+      p.raiseAsk = Math.max(Math.round(p.wage * rnd(1.1, 1.22) / 100) * 100,
+                            behind ? Math.round(going * 0.95 / 100) * 100 : 0);
+      rep.events.push({ kind:'warn', text:p.name + ' wants ' + money(p.raiseAsk) + ' a day, up from ' + money(p.wage) +
+        (behind ? ' — the going rate has moved and they know it.' : '.') });
+    }
+  }
+
+  // 7. collapse
+  if (S.hunger >= 3) collapse(rep);
+
+  S.day += 1; S.today = {};
+  for (const p of S.staff) { p.minsToday = 0; }
+  refreshMarket(true);
+  S.reports.push(rep);
+  if (S.reports.length > 5) S.reports.shift();
+}
+
+function collapse(rep) {
+  S.collapses += 1;
+  post('Emergency loan from a neighbour', [['1000', LOAN_AMOUNT, 0], ['2100', 0, LOAN_AMOUNT]],
+    'You collapsed on the third day without food. Cash rises (an asset) and Loan Payable rises (a liability). Borrowing is not income — your equity has not changed by one cent.');
+  S.loan += LOAN_AMOUNT;
+  const food = EMERGENCY_FOOD * 3 * mouths();
+  post('Emergency food, bought at the tourist price', [['1100', food, 0], ['1000', 0, food]],
+    'Three days of food for ' + mouths() + ' at ' + money(EMERGENCY_FOOD) + ' instead of ' + money(FOOD_DAY) + '. Desperation is expensive, but it is still an asset swap, not an expense.');
+  S.prepaidDays += 3 * mouths(); S.prepaidCents += food; S.hunger = 0;
+  rep.events.push({ kind:'bad', text:'You collapsed. A neighbour lent you ' + money(LOAN_AMOUNT) + ' and stocked the larder.' });
+  rep.collapsed = true;
+}
+
+function processElapsedDays() {
+  const now = Date.now();
+  let n = 0;
+  while (now - S.lastCloseAt >= DAY_MS && n < 60) {
+    S.lastCloseAt += DAY_MS;
+    settleStaff(S.lastCloseAt);   // crew output lands in the day it was earned
+    closeDay();
+    n++;
+  }
+  settleStaff(now);
+  return n;
+}
+
+function sleepEarly() {
+  const now = Date.now();
+  settleStaff(now);
+  S.lastCloseAt = now;
+  closeDay();
+  commit();
+  showReports();
+}
+
+/* =====================================================================
+   STATEMENTS
+   ===================================================================== */
+
+const sumType = (t, today) => CODES.filter(c => ACCOUNTS[c].type === t)
+  .reduce((s, c) => s + (today ? netToday(c) : net(c)), 0);
+const totalRevenue = t => sumType('R', t);
+const totalExpense = t => sumType('X', t);
+const profit = t => totalRevenue(t) - totalExpense(t);
+
+function balanceSheet() {
+  const equipNet = net('1200') - net('1210');
+  const houseNet = net('1400') - net('1410');
+  return {
+    assets: net('1000') + net('1100') + equipNet + net('1300') + houseNet,
+    liabilities: net('2000') + net('2050') + net('2100') + net('2200'),
+    equity: net('3000') + profit(false),
+    equipNet, houseNet,
+  };
+}
+function trialBalance() {
+  const rows = []; let td = 0, tc = 0;
+  for (const code of CODES) {
+    const b = bal(code);
+    if (!b.d && !b.c) continue;
+    const n = b.d - b.c, d = n > 0 ? n : 0, c = n < 0 ? -n : 0;
+    td += d; tc += c;
+    rows.push({ code, name:ACCOUNTS[code].name, d, c });
+  }
+  return { rows, td, tc, ok: td === tc };
+}
+
+/* =====================================================================
+   SCENE
+   ===================================================================== */
+
+function sceneSVG() {
+  const st = S.stage;
+  const ghostAt = st < STAGES.length ? st + 1 : 0;
+  const g = n => (ghostAt === n ? ' class="ghost"' : '');
+  const on = n => st >= n || ghostAt === n;
+  const working = S.staff.filter(p => p.job).slice(0, 4);
+  const spots = [[62, 172], [88, 180], [336, 176], [362, 184]];
+  const crew = working.map((p, i) => {
+    const [x, y] = spots[i]; const cls = ['bob', 'bob b', 'bob c', 'bob d'][i];
+    return '<g class="' + cls + '" fill="var(--crew)">' +
+      '<circle cx="' + x + '" cy="' + (y - 11) + '" r="3.1"/>' +
+      '<path d="M' + (x - 4.2) + ' ' + (y - 12.6) + ' h8.4 l-1.4 -1.6 h-5.6 Z"/>' +
+      '<path d="M' + (x - 2.6) + ' ' + (y - 7.6) + ' h5.2 l1 8.4 h-7.2 Z"/></g>';
+  }).join('');
+
+  return `
+<svg viewBox="0 0 400 210" role="img" aria-label="Your island at build stage ${st} of 6, with ${working.length} crew at work">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="var(--sky-1)"/><stop offset="100%" stop-color="var(--sky-2)"/></linearGradient>
+    <linearGradient id="seaG" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="var(--sea-2)"/><stop offset="100%" stop-color="var(--sea-1)"/></linearGradient>
+    <linearGradient id="sandG" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="var(--sand)"/><stop offset="100%" stop-color="var(--sand-2)"/></linearGradient>
+  </defs>
+  <rect x="0" y="0" width="400" height="210" fill="url(#sky)"/>
+  <circle cx="330" cy="42" r="26" fill="var(--orb-glow)" opacity="0.55"/>
+  <circle cx="330" cy="42" r="15" fill="var(--orb)"/>
+  <rect x="0" y="96" width="400" height="42" fill="url(#seaG)"/>
+  <g class="wave"><path d="M-10 108 q18 -4 36 0 t36 0 t36 0 t36 0 t36 0 t36 0 t36 0 t36 0 t36 0 t36 0" fill="none" stroke="var(--foam)" stroke-width="1.6" opacity="0.6"/></g>
+  <g class="wave b"><path d="M-10 120 q22 -4.5 44 0 t44 0 t44 0 t44 0 t44 0 t44 0 t44 0 t44 0 t44 0" fill="none" stroke="var(--foam)" stroke-width="1.4" opacity="0.4"/></g>
+  <path d="M0 138 q60 -10 132 -3 q80 8 160 -1 q60 -7 108 3 L400 210 L0 210 Z" fill="url(#sandG)"/>
+
+  <g class="sway">
+    <path d="M110 178 q-5 -30 3 -52" fill="none" stroke="var(--trunk)" stroke-width="5.5" stroke-linecap="round"/>
+    <g fill="var(--palm)">
+      <path d="M113 125 q-28 -13 -42 3 q22 -5 41 6 Z"/><path d="M113 125 q28 -14 43 2 q-23 -5 -42 6 Z"/>
+      <path d="M113 125 q-18 -26 -40 -25 q19 8 36 30 Z"/><path d="M113 125 q19 -27 42 -25 q-20 9 -38 31 Z"/>
+    </g>
+    <path d="M113 124 q-4 -12 3 -18 q6 7 2 18 Z" fill="var(--palm-2)"/>
+    <circle cx="110" cy="129" r="3" fill="var(--trunk)"/><circle cx="117" cy="130" r="2.6" fill="var(--trunk)"/>
+  </g>
+
+  ${on(6) ? `<g${g(6)} fill="var(--palm-2)">
+    <path d="M40 186 q4 -13 10 -14 q-2 10 -4 14 Z"/><path d="M50 186 q7 -11 14 -10 q-6 6 -9 10 Z"/>
+    <path d="M340 190 q5 -14 12 -15 q-3 11 -5 15 Z"/><path d="M354 190 q8 -12 15 -11 q-7 7 -10 11 Z"/></g>` : ''}
+
+  ${on(1) ? `<g${g(1)}>
+    <rect x="160" y="132" width="7" height="46" fill="var(--wood-2)"/><rect x="196" y="132" width="7" height="46" fill="var(--wood-2)"/>
+    <rect x="244" y="132" width="7" height="46" fill="var(--wood-2)"/><rect x="286" y="132" width="7" height="46" fill="var(--wood-2)"/>
+    <rect x="152" y="124" width="150" height="9" rx="1.5" fill="var(--wood)"/></g>` : ''}
+  ${on(2) ? `<g${g(2)}>
+    <rect x="158" y="86" width="6" height="40" fill="var(--wood)"/><rect x="290" y="86" width="6" height="40" fill="var(--wood)"/>
+    <rect x="222" y="86" width="5" height="40" fill="var(--wood)" opacity="0.65"/>
+    <rect x="152" y="82" width="150" height="6" rx="1.5" fill="var(--wood)"/>
+    <path d="M158 88 L227 62 L296 88" fill="none" stroke="var(--wood)" stroke-width="4" stroke-linejoin="round"/></g>` : ''}
+  ${on(4) ? `<g${g(4)}>
+    <rect x="162" y="90" width="130" height="35" fill="var(--wall)"/>
+    <rect x="162" y="90" width="130" height="35" fill="none" stroke="var(--wall-2)" stroke-width="1"/>
+    <g stroke="var(--wall-2)" stroke-width="0.8" opacity="0.6"><path d="M162 98 H292"/><path d="M162 106 H292"/><path d="M162 114 H292"/></g>
+    <rect x="217" y="99" width="20" height="26" fill="var(--wood-2)" rx="1"/><circle cx="233" cy="113" r="1.6" fill="var(--thatch)"/>
+    <rect x="176" y="99" width="24" height="17" fill="var(--pane)" rx="1"/><rect x="254" y="99" width="24" height="17" fill="var(--pane)" rx="1"/>
+    <g stroke="var(--wood-2)" stroke-width="1.4"><path d="M176 99 v17"/><path d="M200 99 v17"/><path d="M254 99 v17"/><path d="M278 99 v17"/></g></g>` : ''}
+  ${on(3) ? `<g${g(3)}>
+    <path d="M143 90 L227 54 L311 90 Z" fill="var(--thatch)"/>
+    <path d="M143 90 L227 54 L311 90 Z" fill="none" stroke="var(--thatch-2)" stroke-width="1.5" stroke-linejoin="round"/>
+    <g stroke="var(--thatch-2)" stroke-width="1" opacity="0.75"><path d="M164 90 L227 63"/><path d="M186 90 L227 72"/><path d="M269 90 L227 72"/><path d="M290 90 L227 63"/></g>
+    <rect x="139" y="88" width="176" height="5" rx="2.5" fill="var(--thatch-2)"/>
+    <path d="M227 54 l0 -8" stroke="var(--wood-2)" stroke-width="2.5" stroke-linecap="round"/></g>` : ''}
+  ${on(5) ? `<g${g(5)}>
+    <rect x="132" y="124" width="30" height="9" rx="1.5" fill="var(--wood)"/><rect x="136" y="132" width="6" height="46" fill="var(--wood-2)"/>
+    <g stroke="var(--wood)" stroke-width="2.5" stroke-linecap="round"><path d="M134 124 v-13"/><path d="M148 124 v-13"/><path d="M162 124 v-13"/><path d="M133 112 H163"/></g>
+    <path d="M113 132 q22 22 45 -2" fill="none" stroke="var(--wall)" stroke-width="4" stroke-linecap="round" opacity="0.85"/></g>` : ''}
+  ${on(6) ? `<g${g(6)}>
+    <rect x="316" y="150" width="4.5" height="30" fill="var(--wood-2)"/><path class="flick" d="M318 150 q-5 -8 0 -14 q5 6 0 14 Z" fill="var(--flame)"/>
+    <rect x="122" y="152" width="4.5" height="28" fill="var(--wood-2)"/><path class="flick b" d="M124 152 q-5 -8 0 -13 q5 6 0 13 Z" fill="var(--flame)"/>
+    <g fill="var(--palm-2)"><path d="M300 180 q6 -16 14 -17 q-4 12 -7 17 Z"/><path d="M172 182 q-6 -15 -14 -16 q5 11 8 16 Z"/></g></g>` : ''}
+  ${crew}
+</svg>`;
+}
+
+/* =====================================================================
+   RENDER
+   ===================================================================== */
+
+const el = id => document.getElementById(id);
+
+function renderStatus() {
+  el('dayLabel').textContent = 'Day ' + S.day + (S.houseDone ? ' · Home owner' : '');
+  const cov = foodCover();
+  const parts = [
+    { cls:'cash', label:'Cash', val:moneyShort(cash()) },
+    { cls: cov === 0 ? 'crit' : cov <= 1 ? 'warn' : '', label:'Food', val:cov + 'd' },
+  ];
+  if (S.staff.length) parts.push({ cls:'', label:'Crew', val:S.staff.length + '/' + crewCap() });
+  if (S.hunger > 0) parts.push({ cls:S.hunger >= 2 ? 'crit' : 'warn', label:'Hunger', val:S.hunger + '/3' });
+  el('stats').innerHTML = parts.map(p =>
+    '<div class="stat ' + p.cls + '"><i>' + p.label + '</i><b>' + p.val + '</b></div>').join('');
+}
+
+function renderScene() {
+  const pct = Math.round((S.stage / STAGES.length) * 100);
+  const label = S.stage >= STAGES.length ? 'Finished' : STAGES[S.stage].name;
+  el('scene').innerHTML = sceneSVG() +
+    '<div class="scene-cap"><div class="plaque"><i>' + (S.stage >= STAGES.length ? 'Your house' : 'Building next') + '</i>' +
+    '<b>' + esc(label) + '</b><div class="progtrack"><div class="progfill" style="width:' + pct + '%"></div></div></div>' +
+    '<div class="plaque" style="text-align:right"><i>Book value</i><b>' +
+    moneyShort(S.houseDone ? S.houseCost - S.houseAccum : S.cip) + '</b></div></div>';
+}
+
+/* ---------- island ---------- */
+function viewIsland() {
+  const cov = foodCover();
+  let warn = '';
+  if (S.hunger >= 2) warn = '<div class="notice bad"><b>You are starving.</b> One more day close without food and you collapse.</div>';
+  else if (S.hunger === 1) warn = '<div class="notice warn"><b>You went hungry yesterday.</b> Two more days and you collapse.</div>';
+  else if (cov === 0) warn = '<div class="notice warn"><b>The larder will not cover tomorrow.</b> You need ' + mouths() + ' person-day' + (mouths() === 1 ? '' : 's') + ' a day now.</div>';
+
+  const jobs = JOBS.map(j => {
+    if (!jobUnlocked(j.id)) {
+      return '<div class="job locked"><div class="nm"><b>' + esc(j.name) + '</b><span>' + esc(jobLockReason(j.id)) + '</span></div><span class="pay">Locked</span></div>';
+    }
+    const m = toolMult(j.id) * statusMult(j.id);
+    return '<button class="job" data-job="' + j.id + '"><span class="cool" data-cool="' + j.id + '"></span>' +
+      '<span class="nm"><b>' + esc(j.name) + (m > 1 ? '<span class="mult">' + m.toFixed(1) + '×</span>' : '') + '</b>' +
+      '<span>' + esc(j.hint) + '</span></span>' +
+      '<span class="pay" data-paylabel="' + j.id + '">+' + money(jobPay(j.id)) + '</span></button>';
+  }).join('');
+
+  const active = S.staff.filter(p => p.job);
+  const crewStrip = active.length ? `
+  <section class="card">
+    <header><h2>On shift</h2><p>${active.length} working</p></header>
+    <div class="body">${active.map(p => {
+      const j = JOB(p.job);
+      const rate = ratePerMin(p, p.job);
+      const detail = p.kind === 'employee'
+        ? '<span data-shift="' + p.id + '">calculating…</span>'
+        : p.tasksLeft + ' of ' + (p.tasksLeft + p.tasksDone) + ' ' + j.unit + ' left';
+      return '<div class="row"><div class="nm"><b>' + esc(p.name) + '</b><span>' + esc(j.name.toLowerCase()) +
+        ' · about ' + money(rate) + '/min · ' + detail + '</span></div>' +
+        '<button class="btn ghost sm" data-act="endshift" data-id="' + p.id + '">Stop</button></div>';
+    }).join('')}</div>
+  </section>` : '';
+
+  const today = profit(true);
+  const left = Math.max(0, DAY_MS - (Date.now() - S.lastCloseAt));
+  const hh = Math.floor(left / 3600000), mm = Math.floor((left % 3600000) / 60000);
+
+  return warn + crewStrip + `
+  <section class="card">
+    <header><h2>Work the island</h2><p>${JOBS.filter(j => jobUnlocked(j.id)).length} of ${JOBS.length} open</p></header>
+    <div class="body">
+      <p class="sub">Every job posts a journal entry: cash in on the debit side, revenue on the credit side. Better tools raise what each action pays — that multiplier is the return on what you invested.</p>
+      <div class="jobs">${jobs}</div>
+    </div>
+  </section>
+  <section class="card">
+    <header><h2>Today so far</h2><p>Day ${S.day}</p></header>
+    <div class="body">
+      <div class="scroll-x"><table class="led">
+        <tr><td>Revenue earned today</td><td>${money(totalRevenue(true))}</td></tr>
+        <tr><td>Expenses recognised today</td><td>${money(totalExpense(true))}</td></tr>
+        <tr class="tot"><td>${today >= 0 ? 'Profit' : 'Loss'} for the day</td><td>${money(Math.abs(today))}</td></tr>
+      </table></div>
+      <p class="sub">The day closes on its own in <b>${hh}h ${String(mm).padStart(2, '0')}m</b>: food eaten, wages accrued, depreciation and interest posted.</p>
+      <button class="btn ghost wide" data-act="sleep">End the day early</button>
+    </div>
+  </section>`;
+}
+
+/* ---------- crew ---------- */
+function viewCrew() {
+  refreshMarket(false);
+  const tabs = [['roster', 'Your crew'], ['hire', 'Hiring']];
+  const seg = '<div class="seg" role="tablist">' + tabs.map(([k, l]) =>
+    '<button role="tab" aria-selected="' + (crewTab === k) + '" data-crew="' + k + '">' + l + '</button>').join('') + '</div>';
+  return seg + '<div id="crewBody">' + crewBody() + '</div>';
+}
+function crewBody() { return crewTab === 'roster' ? viewRoster() : viewHiring(); }
+
+function jobPicker(pid, kind) {
+  const p = S.staff.find(x => x.id === pid);
+  const open = JOBS.filter(j => jobUnlocked(j.id));
+  return open.map(j => {
+    const rate = ratePerMin(p, j.id);
+    const spt = secPerTask(p, j.id);
+    let opts, note;
+    if (kind === 'employee') {
+      opts = [30, 120, 240].map(m =>
+        '<button class="btn sm" data-act="shift" data-id="' + pid + '" data-job="' + j.id + '" data-mins="' + m + '">' +
+        (m < 60 ? m + 'm' : (m / 60) + 'h') + ' · ' + moneyShort(rate * m) + '</button>').join('');
+      note = money(rate) + '/min · ' + money(dailyCost(p)) + ' a day to keep';
+    } else {
+      /* Batches are sized by how long they will take, not by a raw count. */
+      opts = [60, 240, 720].map(mins => {
+        const n = Math.max(1, Math.round(mins * 60 / spt));
+        return '<button class="btn sm" data-act="batch" data-id="' + pid + '" data-job="' + j.id + '" data-tasks="' + n + '">' +
+          (mins < 60 ? mins + 'm' : (mins / 60) + 'h') + ' · ' + n + ' ' + j.unit + '</button>';
+      }).join('');
+      const per = jobPay(j.id);
+      note = money(per) + ' a ' + j.unit.replace(/e?s$/, '') + ' · they take ' + money(Math.round(per * p.share)) +
+        ', you keep ' + money(per - Math.round(per * p.share));
+    }
+    return '<div class="row stack"><div class="nm"><b>' + esc(j.name) + '</b><span>' + note + '</span></div>' +
+      '<div class="btnrow">' + opts + '</div></div>';
+  }).join('');
+}
+
+function viewRoster() {
+  const cap = crewCap();
+  if (!S.staff.length) {
+    return '<section class="card"><header><h2>Nobody on the crew</h2><p>Room for ' + cap + '</p></header><div class="body">' +
+      '<p class="sub">You are doing everything yourself. An <b>employee</b> works a shift unattended for a fixed daily wage — and eats from your larder whether they earn or not. A <b>contractor</b> takes a batch of work for a share of each delivery, costs nothing between batches, and feeds themselves.</p>' +
+      '<p class="sub">Every stage of house you build lets you keep more people: ' + cap + ' right now.</p>' +
+      '<button class="btn wide" data-crew="hire">See who is looking for work</button></div></section>';
+  }
+  const people = S.staff.map(p => {
+    const isEmp = p.kind === 'employee';
+    const j = p.job ? JOB(p.job) : null;
+    let statusLine, progress = '';
+    if (j && isEmp) {
+      statusLine = 'On ' + j.name.toLowerCase() + ' · about ' + money(ratePerMin(p, p.job)) + '/min';
+      progress = '<div class="bar"><i data-shiftbar="' + p.id + '" style="width:0%"></i></div>' +
+        '<div class="kv"><span data-shift="' + p.id + '">…</span><span>worked ' + Math.round(p.minsToday) + ' of ' + SHIFT_CAP_MIN + ' min today</span></div>';
+    } else if (j) {
+      const total = p.tasksLeft + p.tasksDone;
+      statusLine = 'On ' + j.name.toLowerCase() + ' · ' + Math.round(p.share * 100) + '% a delivery';
+      progress = '<div class="bar gold"><i style="width:' + Math.round((p.tasksDone / total) * 100) + '%"></i></div>' +
+        '<div class="kv"><span>' + p.tasksDone + ' of ' + total + ' ' + j.unit + '</span><span>fee so far <b>' + money(p.feeAccrued) + '</b></span></div>';
+    } else {
+      statusLine = isEmp ? 'Idle — still costing you ' + money(p.wage) + ' a day' : 'Waiting for a batch';
+    }
+    const tags = '<span class="tag ' + (isEmp ? 'warn' : 'on') + '">' + (isEmp ? 'Employee' : 'Contractor') + '</span>' +
+      (p.strikes ? ' <span class="tag bad">Hungry</span>' : '') +
+      (p.raiseAsk ? ' <span class="tag warn">Asking</span>' : '');
+    const raise = p.raiseAsk ? '<div class="notice warn">' + esc(p.name.split(' ')[0]) + ' wants <b>' + money(p.raiseAsk) +
+      '</b> a day, up from ' + money(p.wage) + '. Agreeing posts nothing today — a rate is not a transaction until a day is worked.</div>' +
+      '<div class="btnrow"><button class="btn sm" data-act="raise-yes" data-id="' + p.id + '">Agree to ' + money(p.raiseAsk) + '</button>' +
+      '<button class="btn ghost sm" data-act="raise-no" data-id="' + p.id + '">Hold the rate</button></div>' : '';
+    return '<div class="person"><div class="ph"><div><b>' + esc(p.name) + '</b>' +
+      '<span>' + esc(statusLine) + '</span></div><div style="text-align:right">' + tags +
+      '<span style="display:block;font-family:var(--font-num);font-size:11px;color:var(--ink-3);margin-top:4px">skill ' + p.skill.toFixed(2) + '×</span></div></div>' +
+      '<div class="pb">' + raise +
+      (isEmp ? '<div class="kv"><span>' + money(p.wage) + '/day · going rate ' + money(marketWage(p.skill)) + '</span>' +
+        '<span>likely to stay <b>' + tenure(quitChance(p)) + 'd</b></span></div>' : '') + progress +
+      (j ? '<button class="btn ghost sm" data-act="endshift" data-id="' + p.id + '">' + (isEmp ? 'End shift' : 'End engagement and invoice') + '</button>'
+         : '<p class="eyebrow">Assign work</p>' + jobPicker(p.id, p.kind) +
+           (isEmp ? '<button class="btn danger sm" data-act="dismiss" data-id="' + p.id + '">Let ' + esc(p.name.split(' ')[0]) + ' go</button>' : '')) +
+      '</div></div>';
+  }).join('');
+
+  const wages = net('2050');
+  return '<section class="card"><header><h2>Your crew</h2><p>' + S.staff.length + ' of ' + cap + ' · ' + mouths() + ' mouths</p></header>' +
+    '<div class="body">' + people +
+    (wages > 0 ? '<div class="notice warn"><b>' + money(wages) + ' of wages owed.</b> Already expensed on the days they were earned — leave it too long and people quit.</div>' +
+      '<button class="btn wide" data-act="paywages" ' + (cash() > 0 ? '' : 'disabled') + '>Pay wages — ' + money(Math.min(wages, cash())) + '</button>' : '') +
+    '</div></section>';
+}
+
+function viewHiring() {
+  const cap = crewCap(), full = S.staff.length >= cap;
+  const cards = (S.market.list || []).map(c => {
+    const isEmp = c.kind === 'employee';
+    const asking = isEmp ? money(c.ask) + ' a day' : Math.round(c.share * 100) + '% of each delivery';
+    const cost = isEmp
+      ? 'Fixed: ' + money(c.ask) + ' a day plus ' + money(FOOD_DAY) + ' of food, worked or not.'
+      : 'Variable: nothing owed until they deliver, nothing between batches, feeds themselves.';
+    const offers = [0, 10, 20, 30].map(pc =>
+      '<button class="btn ' + (pc === 0 ? '' : 'ghost') + ' sm" data-act="negotiate" data-id="' + c.id + '" data-cut="' + pc + '"' +
+      (full ? ' disabled' : '') + '>' + (pc === 0 ? 'Accept' : '−' + pc + '%') + '</button>').join('');
+    /* Show what squeezing the rate costs, so it reads as a trade. */
+    const stay = isEmp ? [0, 10, 20, 30].map(pc => {
+      const wage = Math.round(c.ask * (1 - pc / 100) / 100) * 100;
+      const q = quitChance({ kind:'employee', wage, askedWage:c.origAsk || c.ask, strikes:0, refused:0, raiseAsk:0 });
+      return (pc ? '−' + pc + '%' : 'full') + ' ≈ ' + tenure(q) + 'd';
+    }).join('  ·  ') : 'Leaves when the batch is done';
+    return '<div class="person"><div class="ph"><div><b>' + esc(c.name) + '</b><span>' + esc(cost) + '</span></div>' +
+      '<div style="text-align:right"><span class="tag ' + (isEmp ? 'warn' : 'on') + '">' + (isEmp ? 'Employee' : 'Contractor') + '</span>' +
+      '<span style="display:block;font-family:var(--font-num);font-size:11px;color:var(--ink-3);margin-top:4px">skill ' + c.skill.toFixed(2) + '×</span></div></div>' +
+      '<div class="pb"><div class="kv"><span>Asking</span><b>' + asking + '</b></div>' +
+      '<div class="kv"><span>Likely to stay</span><span style="font-size:10.5px">' + stay + '</span></div>' +
+      '<div class="btnrow">' + offers + '</div></div></div>';
+  }).join('');
+
+  return '<section class="card"><header><h2>Looking for work</h2><p>Day ' + S.day + ' · ' + S.staff.length + ' of ' + cap + ' hired</p></header>' +
+    '<div class="body">' +
+    (full ? '<div class="notice warn"><b>Your crew is full at ' + cap + '.</b> Build another stage of house to make room — standing is what lets you keep people.</div>' : '') +
+    '<p class="sub">Counter below their asking rate and they may accept, come back with a number in the middle, or walk off. A finer house brings better people and makes them likelier to say yes.</p>' +
+    (cards || '<p class="sub">Nobody left today. New people come by at each day close.</p>') +
+    '<p class="sub" style="color:var(--ink-3)">Hiring itself posts nothing. A handshake is not a transaction — the books only move when someone works, eats, or gets paid.</p>' +
+    '</div></section>';
+}
+
+/* ---------- build ---------- */
+function viewBuild() {
+  const done = S.stage >= STAGES.length;
+  const stages = STAGES.map((st, i) => {
+    const isDone = i < S.stage, isNext = i === S.stage;
+    return '<div class="stage ' + (isDone ? 'done' : isNext ? 'next' : '') + '"><div class="no">' + (isDone ? '✓' : i + 1) + '</div>' +
+      '<div class="info"><b>' + esc(st.name) + '</b><p>' + esc(st.desc) + '</p>' +
+      '<span class="cost" style="color:' + (isDone ? 'var(--accent)' : isNext ? 'var(--gold)' : 'var(--ink-3)') + '">' +
+      (isDone ? 'Capitalised ' + money(st.cost) : money(st.cost)) + '</span></div></div>';
+  }).join('');
+  const next = done ? null : STAGES[S.stage];
+
+  return `
+  <section class="card">
+    <header><h2>What standing buys</h2><p>Stage ${S.stage} of ${STAGES.length}</p></header>
+    <div class="body">
+      <div class="scroll-x"><table class="led">
+        <tr><td>Tourism revenue</td><td>${statusMult('tour').toFixed(2)}×</td></tr>
+        <tr><td>Supplier terms</td><td>${apTerms()} days</td></tr>
+        <tr><td>Loan interest</td><td>${(loanRate() * 100).toFixed(1)}%/day</td></tr>
+        <tr><td>Crew you can keep</td><td>${crewCap()}</td></tr>
+        <tr><td>Calibre of people looking</td><td>+${Math.round(S.stage * 5)}%</td></tr>
+      </table></div>
+      <div class="notice"><b>None of this is in your books.</b> Standing has real value — better visitors, longer terms, cheaper credit, better crew — and not one cent of it can be posted. An asset has to be something you paid for and control. Reputation is neither.</div>
+    </div>
+  </section>
+  <section class="card">
+    <header><h2>${done ? 'Your house' : 'Build the house'}</h2><p>${S.stage} of ${STAGES.length}</p></header>
+    <div class="body">
+      <p class="sub">${done
+        ? 'Complete, sitting in the <b>House</b> account at ' + money(S.houseCost) + ' less ' + money(S.houseAccum) + ' of accumulated depreciation.'
+        : 'Money spent here does not disappear — it moves from Cash into <b>Construction in Progress</b>. Your wealth is unchanged; it has only changed shape.'}</p>
+      ${next ? `<div class="btnstack">
+        <button class="btn wide" data-act="build-cash" ${cash() >= next.cost ? '' : 'disabled'}>Build ${esc(next.name.toLowerCase())} — ${money(next.cost)} cash</button>
+        <button class="btn ghost wide" data-act="build-credit">Buy materials on account — ${apTerms()}-day terms</button>
+      </div>` : ''}
+      ${stages}
+    </div>
+  </section>`;
+}
+
+/* ---------- market ---------- */
+function viewMarket() {
+  const tracks = Object.keys(TOOLS).map(k => {
+    const t = TOOLS[k], owned = S.tools[k] || 0;
+    const rows = t.tiers.map((tier, i) => {
+      const have = i < owned, isNext = i === owned;
+      const item = have ? S.equip.find(e => e.name === tier.name) : null;
+      return '<div class="row"><div class="nm"><b>' + esc(tier.name) + (have ? '' : '') + '</b><span>' +
+        (have && item ? 'Owned · book value ' + money(item.cost - item.accum) + ' · yield ' + tier.mult.toFixed(1) + '×'
+                      : esc(tier.blurb) + ' · yield ' + tier.mult.toFixed(1) + '×') + '</span></div>' +
+        (have ? '<span class="tag on">Owned</span>'
+              : isNext ? '<button class="btn" data-act="tool" data-track="' + k + '" ' + (cash() >= tier.cost ? '' : 'disabled') + '>' + money(tier.cost) + '</button>'
+                       : '<span class="tag">Locked</span>') + '</div>';
+    }).join('');
+    return '<section class="card"><header><h2>' + esc(t.label) + '</h2><p>' +
+      (owned ? 'yield ' + t.tiers[owned - 1].mult.toFixed(1) + '×' : 'bare hands') + '</p></header><div class="body">' + rows + '</div></section>';
+  }).join('');
+
+  const m = mouths(), cov = foodCover();
+  const apRows = S.ap.map(a => {
+    const late = S.day > a.dueDay;
+    return '<div class="row"><div class="nm"><b>' + esc(a.memo) + '</b><span>' +
+      (late ? 'Overdue since day ' + a.dueDay + ' · ' + AP_RATE * 100 + '%/day' : 'Due day ' + a.dueDay) + '</span></div>' +
+      '<button class="btn ' + (late ? 'gold' : 'ghost') + '" data-act="payap" data-id="' + a.id + '" ' +
+      (cash() >= a.cents ? '' : 'disabled') + '>' + money(a.cents) + '</button></div>';
+  }).join('');
+  const intOwed = net('2200'), wagesOwed = net('2050');
+  const anyDebt = S.ap.length || S.loan > 0 || intOwed > 0 || wagesOwed > 0;
+
+  return `
+  <section class="card">
+    <header><h2>Food</h2><p>${S.prepaidDays} person-days · ${cov} day${cov === 1 ? '' : 's'} of cover</p></header>
+    <div class="body">
+      <p class="sub">Food is bought in <b>person-days</b>. You and every employee eat one a day — ${m} mouth${m === 1 ? '' : 's'} right now. Buying it is not an expense; it sits in Prepaid Food until it is eaten.</p>
+      <div class="row"><div class="nm"><b>One person-day</b><span>Five minutes of bare-handed coconut work</span></div>
+        <button class="btn" data-act="food" data-units="1" ${cash() >= FOOD_DAY ? '' : 'disabled'}>${money(FOOD_DAY)}</button></div>
+      <div class="row"><div class="nm"><b>Seven person-days</b><span>Bulk price — ${money(FOOD_BULK)} each instead of ${money(FOOD_DAY)}</span></div>
+        <button class="btn" data-act="food" data-units="7" ${cash() >= FOOD_BULK * 7 ? '' : 'disabled'}>${money(FOOD_BULK * 7)}</button></div>
+      ${m > 1 ? `<div class="row"><div class="nm"><b>A week for the whole crew</b><span>${7 * m} person-days at the bulk price</span></div>
+        <button class="btn gold" data-act="food" data-units="${7 * m}" ${cash() >= FOOD_BULK * 7 * m ? '' : 'disabled'}>${money(FOOD_BULK * 7 * m)}</button></div>` : ''}
+      ${S.prepaidDays > 0 ? '<div class="notice">Prepaid Food carries ' + money(S.prepaidCents) + '. About ' + money(Math.round(S.prepaidCents / S.prepaidDays) * m) + ' will be expensed at each day close.</div>' : ''}
+    </div>
+  </section>
+  ${tracks}
+  ${anyDebt ? `<section class="card">
+    <header><h2>What you owe</h2><p>${money(net('2000') + net('2050') + net('2100') + intOwed)}</p></header>
+    <div class="body">
+      ${wagesOwed > 0 ? '<div class="row"><div class="nm"><b>Wages payable</b><span>Already expensed as your crew earned it</span></div>' +
+        '<button class="btn" data-act="paywages" ' + (cash() > 0 ? '' : 'disabled') + '>' + money(wagesOwed) + '</button></div>' : ''}
+      ${apRows}
+      ${S.loan > 0 ? '<div class="row"><div class="nm"><b>Neighbour loan</b><span>' + (loanRate() * 100).toFixed(1) + '% a day at your current standing</span></div>' +
+        '<button class="btn ghost" data-act="repay" ' + (cash() > 0 ? '' : 'disabled') + '>' + money(S.loan) + '</button></div>' : ''}
+      ${intOwed > 0 ? '<div class="row"><div class="nm"><b>Interest payable</b><span>Expensed as it accrued — this only clears the liability</span></div>' +
+        '<button class="btn ghost" data-act="payint" ' + (cash() > 0 ? '' : 'disabled') + '>' + money(intOwed) + '</button></div>' : ''}
+    </div>
+  </section>` : ''}`;
+}
+
+/* ---------- books ---------- */
+function viewBooks() {
+  const tabs = [['journal', 'Journal'], ['t', 'T-accounts'], ['tb', 'Trial balance'], ['is', 'Income'], ['bs', 'Balance sheet'], ['learn', 'Concepts']];
+  return '<div class="seg" role="tablist">' + tabs.map(([k, l]) =>
+    '<button role="tab" aria-selected="' + (booksTab === k) + '" data-books="' + k + '">' + l + '</button>').join('') +
+    '</div><div id="booksBody">' + booksBody() + '</div>';
+}
+function booksBody() {
+  return booksTab === 'journal' ? viewJournal() : booksTab === 't' ? viewTAccounts()
+    : booksTab === 'tb' ? viewTrialBalance() : booksTab === 'is' ? viewIncome()
+    : booksTab === 'bs' ? viewBalanceSheet() : viewLearn();
+}
+
+function viewJournal() {
+  if (!S.journal.length) return '<div class="paper"><p class="sub">No entries yet. Go and harvest a coconut.</p></div>';
+  const items = S.journal.map(e => {
+    const dr = e.lines.filter(l => l[1] > 0).map(l =>
+      '<div class="ln"><span>' + esc(ACCOUNTS[l[0]].name) + '</span><span>' + money(l[1]) + '</span><span></span></div>').join('');
+    const cr = e.lines.filter(l => l[2] > 0).map(l =>
+      '<div class="ln cr"><span>' + esc(ACCOUNTS[l[0]].name) + '</span><span></span><span>' + money(l[2]) + '</span></div>').join('');
+    return '<div class="entry"><div class="eh"><b>' + esc(e.memo) + '</b><span>#' + e.n + ' · d' + e.day + '</span></div>' +
+      '<div class="ln" style="color:var(--ink-3);font-size:9.5px;letter-spacing:.1em;text-transform:uppercase"><span></span><span>Debit</span><span>Credit</span></div>' +
+      dr + cr + (e.why ? '<p class="why">' + esc(e.why) + '</p>' : '') + '</div>';
+  }).join('');
+  return '<div class="paper"><p class="eyebrow" style="margin-bottom:10px">General journal · ' + S.entryNo + ' entries posted' +
+    (S.entryNo > S.journal.length ? ', showing the last ' + S.journal.length : '') + '</p>' + items + '</div>';
+}
+
+function viewTAccounts() {
+  const cards = CODES.filter(c => { const b = bal(c); return b.d || b.c; }).map(code => {
+    const b = bal(code);
+    return '<div class="tacct"><div class="th"><b>' + esc(ACCOUNTS[code].name) + '</b><span>' + code + ' · ' +
+      (ACCOUNTS[code].normal === 'D' ? 'debit' : 'credit') + ' balance ' + money(net(code)) + '</span></div>' +
+      '<div class="tb"><div><i>Debit</i>' + money(b.d) + '</div><div><i>Credit</i>' + money(b.c) + '</div></div></div>';
+  }).join('');
+  return '<div class="paper"><p class="eyebrow" style="margin-bottom:10px">Ledger accounts</p>' +
+    '<p class="sub" style="margin-bottom:12px">Each account collects every debit on the left and every credit on the right. The difference is its balance.</p>' +
+    '<div class="tgrid">' + cards + '</div></div>';
+}
+
+function viewTrialBalance() {
+  const tb = trialBalance();
+  return '<div class="paper"><p class="eyebrow" style="margin-bottom:10px">Trial balance · day ' + S.day + '</p>' +
+    '<div class="scroll-x"><table class="led"><tr><th>Account</th><th>Debit</th><th>Credit</th></tr>' +
+    tb.rows.map(r => '<tr><td>' + r.code + ' · ' + esc(r.name) + '</td><td>' + (r.d ? money(r.d) : '') + '</td><td>' + (r.c ? money(r.c) : '') + '</td></tr>').join('') +
+    '<tr class="tot"><td>Total</td><td>' + money(tb.td) + '</td><td>' + money(tb.tc) + '</td></tr></table></div>' +
+    '<div class="check' + (tb.ok ? '' : ' bad') + '" style="margin-top:12px">' +
+    (tb.ok ? '✓ Debits equal credits, to the cent.' : '✗ Out of balance — that is a bug.') + '</div>' +
+    '<p class="sub" style="margin-top:10px">Nothing forces these columns to match except the rule that every entry has equal debits and credits.</p></div>';
+}
+
+function viewIncome() {
+  const rev = CODES.filter(c => ACCOUNTS[c].type === 'R').filter(c => bal(c).d || bal(c).c);
+  const exp = CODES.filter(c => ACCOUNTS[c].type === 'X').filter(c => bal(c).d || bal(c).c);
+  const row = c => '<tr><td class="ind">' + esc(ACCOUNTS[c].name) + '</td><td>' + money(netToday(c)) + '</td><td>' + money(net(c)) + '</td></tr>';
+  const p = profit(false);
+  const labour = net('5400') + net('5500');
+  return '<div class="paper"><p class="eyebrow" style="margin-bottom:10px">Income statement</p>' +
+    '<div class="scroll-x"><table class="led"><tr><th>&nbsp;</th><th>Today</th><th>Since day 1</th></tr>' +
+    '<tr class="sub"><td>Revenue</td><td></td><td></td></tr>' + rev.map(row).join('') +
+    '<tr><td>Total revenue</td><td>' + money(totalRevenue(true)) + '</td><td>' + money(totalRevenue(false)) + '</td></tr>' +
+    '<tr class="sub"><td>Expenses</td><td></td><td></td></tr>' + exp.map(row).join('') +
+    '<tr><td>Total expenses</td><td>' + money(totalExpense(true)) + '</td><td>' + money(totalExpense(false)) + '</td></tr>' +
+    '<tr class="tot"><td>' + (p >= 0 ? 'Profit' : 'Loss') + '</td><td>' + money(profit(true)) + '</td><td>' + money(p) + '</td></tr></table></div>' +
+    (labour > 0 ? '<p class="sub" style="margin-top:12px">Of ' + money(totalExpense(false)) + ' in expenses, ' + money(labour) +
+      ' is labour: <b>' + money(net('5400')) + '</b> in wages you owed whether the work happened or not, and <b>' + money(net('5500')) +
+      '</b> in contract fees you only owed because it did.</p>' : '') +
+    '<p class="sub" style="margin-top:10px">Notice what is missing: not a cent of the ' + money(S.houseDone ? S.houseCost : S.cip) +
+    ' in the house, and nothing at all for the standing it earns you.</p></div>';
+}
+
+function viewBalanceSheet() {
+  const b = balanceSheet();
+  const ok = b.assets === b.liabilities + b.equity;
+  return '<div class="paper"><p class="eyebrow" style="margin-bottom:10px">Balance sheet · day ' + S.day + '</p>' +
+    '<div class="scroll-x"><table class="led">' +
+    '<tr class="sub"><td>Assets</td><td></td></tr>' +
+    '<tr><td class="ind">Cash</td><td>' + money(net('1000')) + '</td></tr>' +
+    '<tr><td class="ind">Prepaid food</td><td>' + money(net('1100')) + '</td></tr>' +
+    (net('1200') ? '<tr><td class="ind">Equipment, net of ' + money(net('1210')) + ' depreciation</td><td>' + money(b.equipNet) + '</td></tr>' : '') +
+    (net('1300') ? '<tr><td class="ind">Construction in progress</td><td>' + money(net('1300')) + '</td></tr>' : '') +
+    (net('1400') ? '<tr><td class="ind">House, net of ' + money(net('1410')) + ' depreciation</td><td>' + money(b.houseNet) + '</td></tr>' : '') +
+    '<tr><td>Total assets</td><td>' + money(b.assets) + '</td></tr>' +
+    '<tr class="sub"><td>Liabilities</td><td></td></tr>' +
+    '<tr><td class="ind">Accounts payable</td><td>' + money(net('2000')) + '</td></tr>' +
+    '<tr><td class="ind">Wages payable</td><td>' + money(net('2050')) + '</td></tr>' +
+    '<tr><td class="ind">Loan payable</td><td>' + money(net('2100')) + '</td></tr>' +
+    '<tr><td class="ind">Interest payable</td><td>' + money(net('2200')) + '</td></tr>' +
+    '<tr><td>Total liabilities</td><td>' + money(b.liabilities) + '</td></tr>' +
+    '<tr class="sub"><td>Equity</td><td></td></tr>' +
+    "<tr><td class=\"ind\">Owner's capital</td><td>" + money(net('3000')) + '</td></tr>' +
+    '<tr><td class="ind">Accumulated ' + (profit(false) >= 0 ? 'profit' : 'loss') + '</td><td>' + money(profit(false)) + '</td></tr>' +
+    '<tr><td>Total equity</td><td>' + money(b.equity) + '</td></tr>' +
+    '<tr class="tot"><td>Liabilities + equity</td><td>' + money(b.liabilities + b.equity) + '</td></tr></table></div>' +
+    '<div class="check' + (ok ? '' : ' bad') + '" style="margin-top:12px">' +
+    (ok ? '✓ Assets = Liabilities + Equity' : '✗ The accounting equation does not hold — that is a bug.') + '</div></div>';
+}
+
+function viewLearn() {
+  const C = [
+    ['Why every entry has two sides',
+     'Every transaction changes at least two things. Sell a coconut and you gain cash <em>and</em> gain income. Double-entry writes both down, one as a <code>debit</code> and one as a <code>credit</code>, always equal.'],
+    ['Debit and credit are not good and bad',
+     'They only mean left and right. Assets and expenses grow on the <code>debit</code> side. Liabilities, equity and revenue grow on the <code>credit</code> side. Debiting Cash means you have more of it.'],
+    ['Paying is not the same as expensing',
+     'Buy a week of food and you have lost nothing — you swapped cash for Prepaid Food. The expense happens on each day it is actually eaten. That is <em>accrual</em> accounting: costs land in the period they are used, not the period they are paid.'],
+    ['Fixed cost or variable cost?',
+     'An <b>employee</b> is a fixed cost. Their wage is expensed every day they are on your books, worked or not, and it piles up in Wages Payable until you pay it. They also eat from your larder. A <b>contractor</b> is a variable cost: nothing is owed until they deliver, and the invoice is expensed the moment they do. Employees are cheaper when you can keep them busy and brutal when you cannot — which is the whole reason the distinction exists.'],
+    ['Why the house is not an expense',
+     'The house serves you for years, so its cost is <em>capitalised</em> — held as an asset. Your profit does not drop when you build, even though your cash does. Only once it is finished and in use does a slice of its cost become Depreciation Expense each day.'],
+    ['Depreciation costs no cash',
+     'It is the one expense that never touches your wallet. It moves value out of an asset you already paid for and into the income statement, spread over the life of the thing. The credit goes to <em>accumulated depreciation</em>, a contra-asset, so you can still see what you originally paid.'],
+    ['Tools are an investment, not a cost',
+     'A hand cart nearly triples what an hour of harvesting pays. On the income statement it appears only as a few cents a day of depreciation; on the balance sheet it is an asset. The return shows up as revenue that grew without the hours growing — which is exactly what investment is supposed to look like.'],
+    ['Standing is not an asset',
+     'A finer house brings better visitors, longer supplier terms, cheaper credit and better people. All of that is worth real money and <b>none of it is in your books</b>. An asset must be something you paid for and control; a reputation is neither. Accountants call the recorded kind <em>goodwill</em>, and you may only book it when you have bought someone else&rsquo;s.'],
+    ['Borrowing is not income',
+     'When the neighbour lends you money, cash jumps but you are no better off: an asset and a liability rose together and equity did not move. Only the <em>interest</em> is an expense, recognised as it accrues, before you pay a cent of it.'],
+    ['What the balance sheet is really saying',
+     'Assets = Liabilities + Equity is the same fact written twice. The left says what the island owns; the right says who has a claim on it — lenders and unpaid crew first, then you.'],
+  ];
+  return C.map(([t, b]) => '<details class="concept"><summary>' + t + '</summary><div class="cbody">' + b + '</div></details>').join('') +
+    '<div class="paper"><p class="eyebrow" style="margin-bottom:8px">Chart of accounts</p><div class="scroll-x"><table class="led">' +
+    '<tr><th>Code</th><th>Account</th><th>Normal</th></tr>' +
+    CODES.map(c => '<tr><td>' + c + '</td><td style="text-align:right;font-family:var(--font-ui)">' + esc(ACCOUNTS[c].name) +
+      '</td><td>' + (ACCOUNTS[c].normal === 'D' ? 'Debit' : 'Credit') + '</td></tr>').join('') + '</table></div></div>' +
+    '<div class="paper"><p class="eyebrow" style="margin-bottom:8px">Backup</p>' +
+    '<p class="sub" style="margin-bottom:10px">This island is saved in this browser on this device, and nowhere else. ' +
+    'Clearing Safari&rsquo;s website data would erase it. Take a backup code before you clear anything or move to a new phone.</p>' +
+    '<div class="btnstack"><button class="btn wide" data-act="backup">Show backup code</button>' +
+    '<button class="btn ghost wide" data-act="restore">Restore from a code</button></div></div>' +
+    '<div class="paper"><p class="eyebrow" style="margin-bottom:8px">Danger zone</p>' +
+    '<p class="sub" style="margin-bottom:10px">Wipes your island, your crew and your books, and starts again at day 1.</p>' +
+    '<button class="btn danger wide" data-act="reset">Start a new island</button></div>';
+}
+
+const ICONS = {
+  island:'<path d="M3 18c2 0 2-1.5 4-1.5S9 18 11 18s2-1.5 4-1.5S17 18 19 18"/><path d="M12 15V8"/><path d="M12 8c-3-2-6-1-7 1 2.5-.5 5 0 7-1z"/><path d="M12 8c3-2 6-1 7 1-2.5-.5-5 0-7-1z"/>',
+  crew:'<circle cx="9" cy="8" r="3"/><path d="M3 20a6 6 0 0 1 12 0"/><path d="M16 5.5a3 3 0 0 1 0 5.8"/><path d="M18 20a6 6 0 0 0-2-4.5"/>',
+  build:'<path d="M3 20h18"/><path d="M5 20v-9l7-5 7 5v9"/><path d="M10 20v-5h4v5"/>',
+  market:'<path d="M4 8h16l-1.2 10.2a2 2 0 0 1-2 1.8H7.2a2 2 0 0 1-2-1.8Z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/>',
+  books:'<path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H19v15H6.5A2.5 2.5 0 0 0 4 20.5Z"/><path d="M9 8h6"/><path d="M9 12h6"/>',
+};
+function renderTabs() {
+  const items = [['island', 'Island'], ['crew', 'Crew'], ['build', 'Build'], ['market', 'Market'], ['books', 'Books']];
+  el('tabbar').innerHTML = items.map(([k, l]) => {
+    let dot = '';
+    if (k === 'market' && (foodCover() === 0 || S.hunger > 0)) dot = '<span class="dot"></span>';
+    if (k === 'crew' && (S.staff.some(p => !p.job || p.raiseAsk) || net('2050') > 0)) dot = '<span class="dot"></span>';
+    return '<button role="tab" aria-selected="' + (uiTab === k) + '" data-tab="' + k + '"><svg viewBox="0 0 24 24">' +
+      ICONS[k] + '</svg>' + l + dot + '</button>';
+  }).join('');
+}
+
+function render() {
+  renderStatus(); renderScene(); renderTabs();
+  const m = el('main');
+  m.innerHTML = uiTab === 'island' ? viewIsland() : uiTab === 'crew' ? viewCrew()
+    : uiTab === 'build' ? viewBuild() : uiTab === 'market' ? viewMarket() : viewBooks();
+  m.scrollTop = 0;
+}
+
+/* ---------- toasts / sheets ---------- */
+function toast(html) {
+  const host = el('toasts');
+  const t = document.createElement('div');
+  t.className = 'toast'; t.innerHTML = html;
+  host.appendChild(t);
+  setTimeout(() => { t.classList.add('fade'); setTimeout(() => t.remove(), 320); }, 2100);
+  while (host.children.length > 3) host.firstChild.remove();
+}
+function openSheet(title, bodyHtml, cta, onClose) {
+  const host = el('modalHost');
+  host.innerHTML = '<div class="scrim"><div class="sheet" role="dialog" aria-modal="true"><h2>' + title + '</h2>' +
+    bodyHtml + '<button class="btn wide" data-act="closesheet">' + (cta || 'Got it') + '</button></div></div>';
+  host.querySelector('[data-act="closesheet"]').addEventListener('click', () => {
+    host.innerHTML = ''; if (onClose) onClose(); else render();
+  }, { once:true });
+}
+function showReports() {
+  if (!S.reports.length) return;
+  const reps = S.reports.slice(); S.reports = [];
+  const collapsed = reps.some(r => r.collapsed);
+  const body = reps.map(r => '<div style="display:flex;flex-direction:column;gap:8px"><p class="eyebrow">Day ' + r.day + ' closed</p>' +
+    r.events.map(e => '<div class="notice' + (e.kind === 'bad' ? ' bad' : e.kind === 'warn' ? ' warn' : '') + '">' + esc(e.text) + '</div>').join('') +
+    '<div class="scroll-x"><table class="led"><tr><td>Revenue</td><td>' + money(r.revenue) + '</td></tr>' +
+    '<tr><td>Expenses</td><td>' + money(r.expense) + '</td></tr>' +
+    '<tr class="tot"><td>' + (r.profit >= 0 ? 'Profit' : 'Loss') + '</td><td>' + money(Math.abs(r.profit)) + '</td></tr></table></div></div>').join('<div style="height:6px"></div>');
+  openSheet(collapsed ? 'You collapsed' : (reps.length > 1 ? reps.length + ' days closed while you were away' : 'The day closed'),
+    '<p class="lede">' + (collapsed ? 'Three days without food. You are alive, in debt, and the books recorded every bit of it.'
+      : 'These entries post themselves at the end of every day — nobody taps a button to make depreciation or a wage bill happen.') + '</p>' + body,
+    'Back to the island', () => commit());
+}
+
+/* ---------- persistence ---------- */
+function saveLocal() {
+  S.savedAt = Date.now();
+  try { localStorage.setItem(SAVE_KEY, JSON.stringify(S)); } catch (e) {}
+}
+function loadLocal() {
+  try { const raw = localStorage.getItem(SAVE_KEY); return raw ? migrate(JSON.parse(raw)) : null; } catch (e) { return null; }
+}
+/* This copy has no cloud storage of any kind. The island lives in this
+   browser, on this device, and nowhere else — which is what makes the page
+   safe to hand to anyone. Backup codes are the way to move it. */
+function backupCode() {
+  const slim = Object.assign({}, S, { journal: [], reports: [] });
+  return btoa(unescape(encodeURIComponent(JSON.stringify(slim))));
+}
+function restoreFrom(code) {
+  let obj;
+  try { obj = JSON.parse(decodeURIComponent(escape(atob(code.trim())))); }
+  catch (e) { return 'That code could not be read. Copy the whole thing, with no line breaks removed.'; }
+  const ok = migrate(obj);
+  if (!ok) return 'That code is from a different game or a version this copy cannot read.';
+  S = ok;
+  S.cool = S.cool || {}; S.reports = []; S.journal = S.journal || [];
+  S.staff = S.staff || []; S.equip = S.equip || [];
+  S.tools = S.tools || { coconut:0, fish:0, tour:0, carve:0 };
+  S.nextId = S.nextId || 1;
+  refreshMarket(true);
+  processElapsedDays();
+  commit();
+  return null;
+}
+
+function commit() { saveLocal(); render(); }
+
+/* ---------- events ---------- */
+document.addEventListener('click', ev => {
+  const jb = ev.target.closest('[data-job]:not([data-act])');
+  if (jb && jb.classList.contains('job')) { doJob(jb.dataset.job); return; }
+
+  const tb = ev.target.closest('[data-tab]');
+  if (tb) { uiTab = tb.dataset.tab; render(); return; }
+
+  const bt = ev.target.closest('[data-books]');
+  if (bt) {
+    booksTab = bt.dataset.books;
+    el('main').querySelectorAll('[data-books]').forEach(b => b.setAttribute('aria-selected', String(b.dataset.books === booksTab)));
+    el('booksBody').innerHTML = booksBody();
+    return;
+  }
+  const ct = ev.target.closest('[data-crew]');
+  if (ct) { crewTab = ct.dataset.crew; uiTab = 'crew'; render(); return; }
+
+  const a = ev.target.closest('[data-act]');
+  if (!a) return;
+  const act = a.dataset.act;
+  if (act === 'food') buyFoodUnits(parseInt(a.dataset.units, 10));
+  else if (act === 'tool') buyTool(a.dataset.track);
+  else if (act === 'build-cash') buildStage(false);
+  else if (act === 'build-credit') buildStage(true);
+  else if (act === 'payap') payAp(a.dataset.id);
+  else if (act === 'paywages') payWages();
+  else if (act === 'repay') repayLoan();
+  else if (act === 'payint') payInterest();
+  else if (act === 'sleep') sleepEarly();
+  else if (act === 'negotiate') negotiate(a.dataset.id, parseInt(a.dataset.cut, 10));
+  else if (act === 'shift') assignShift(a.dataset.id, a.dataset.job, parseInt(a.dataset.mins, 10));
+  else if (act === 'batch') assignBatch(a.dataset.id, a.dataset.job, parseInt(a.dataset.tasks, 10));
+  else if (act === 'endshift') endEngagement(a.dataset.id);
+  else if (act === 'dismiss') dismiss(a.dataset.id);
+  else if (act === 'backup') {
+    openSheet('Your backup code',
+      '<p class="lede">This is your whole island — day, cash, crew, tools, house and every account balance. The journal history is left out to keep it short; your balances are all here.</p>' +
+      '<textarea class="code" id="backupCode" readonly>' + backupCode() + '</textarea>' +
+      '<button class="btn wide" data-act="copycode">Copy to clipboard</button>' +
+      '<p class="sub">Paste it somewhere safe — a note to yourself, an email. Restoring it on any device rebuilds the island exactly.</p>', 'Done');
+    setTimeout(() => { const t = document.getElementById('backupCode'); if (t) { t.focus(); t.select(); } }, 60);
+  }
+  else if (act === 'copycode') {
+    const t = document.getElementById('backupCode');
+    if (!t) return;
+    t.select();
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(t.value).then(() => toast('Backup code copied'), () => toast('Select the text and copy it by hand'));
+    } else { try { document.execCommand('copy'); toast('Backup code copied'); } catch (e) { toast('Select the text and copy it by hand'); } }
+  }
+  else if (act === 'restore') {
+    openSheet('Restore an island',
+      '<p class="lede">Paste a backup code below. This replaces whatever is on this device right now, and there is no undo.</p>' +
+      '<textarea class="code" id="restoreCode" placeholder="Paste your backup code here"></textarea>' +
+      '<button class="btn danger wide" data-act="dorestore">Replace this island</button>', 'Cancel');
+  }
+  else if (act === 'dorestore') {
+    const t = document.getElementById('restoreCode');
+    if (!t || !t.value.trim()) return toast('Paste a code first.');
+    const err = restoreFrom(t.value);
+    if (err) { toast(err); return; }
+    el('modalHost').innerHTML = '';
+    toast('Island restored — day ' + S.day);
+    showReports();
+  }
+  else if (act === 'raise-yes') answerRaise(a.dataset.id, true);
+  else if (act === 'raise-no') answerRaise(a.dataset.id, false);
+  else if (act === 'reset') {
+    openSheet('Start over?', '<p class="lede">This erases your island, your crew and your books. There is no undo.</p>' +
+      '<button class="btn danger wide" data-act="reset2">Yes, wipe everything</button>', 'Keep playing');
+    document.querySelector('[data-act="reset2"]').addEventListener('click', () => {
+      try { localStorage.removeItem(SAVE_KEY); } catch (e) {}
+      el('modalHost').innerHTML = ''; boot(true);
+    }, { once:true });
+  }
+});
+
+/* cooldown + shift tickers */
+setInterval(() => {
+  if (!S) return;
+  const now = Date.now();
+  if (uiTab === 'island') {
+    for (const j of JOBS) {
+      const fill = document.querySelector('[data-cool="' + j.id + '"]');
+      if (!fill) continue;
+      const left = (S.cool[j.id] || 0) - now;
+      const btn = fill.closest('.job');
+      const lbl = document.querySelector('[data-paylabel="' + j.id + '"]');
+      if (left > 0) {
+        fill.style.width = (100 - (left / j.cd) * 100) + '%';
+        btn.classList.remove('ready');
+        if (lbl) lbl.textContent = (left / 1000).toFixed(1) + 's';
+      } else {
+        fill.style.width = '0%'; btn.classList.add('ready');
+        if (lbl) lbl.textContent = '+' + money(jobPay(j.id));
+      }
+    }
+  }
+  for (const p of S.staff) {
+    const t = document.querySelector('[data-shift="' + p.id + '"]');
+    if (t && p.job && p.kind === 'employee') {
+      const left = Math.max(0, p.endsAt - now);
+      t.textContent = left > 0 ? Math.floor(left / 60000) + 'm ' + String(Math.floor((left % 60000) / 1000)).padStart(2, '0') + 's left' : 'shift over';
+      const bar = document.querySelector('[data-shiftbar="' + p.id + '"]');
+      if (bar) {
+        const spt = secPerTask(p, p.job) * 1000;
+        const doneMs = Math.min(now, p.endsAt) - p.settledUntil;
+        bar.style.width = Math.max(0, Math.min(100, (doneMs % spt) / spt * 100)) + '%';
+      }
+    }
+  }
+}, 200);
+
+/* settle crew output and roll days */
+setInterval(() => {
+  if (!S) return;
+  const n = processElapsedDays();
+  if (n) { commit(); showReports(); } else { saveLocal(); }
+}, 15000);
+document.addEventListener('visibilitychange', () => {
+  if (!document.hidden && S) { const n = processElapsedDays(); commit(); if (n) showReports(); }
+});
+
+/* ---------- boot ---------- */
+function boot(fresh) {
+  const now = Date.now();
+  const loaded = fresh ? null : loadLocal();
+  if (loaded) {
+    S = loaded;
+    S.cool = S.cool || {}; S.reports = S.reports || []; S.staff = S.staff || []; S.equip = S.equip || [];
+    S.tools = S.tools || { coconut:0, fish:0, tour:0, carve:0 };
+    S.nextId = S.nextId || 1;
+  } else {
+    S = blankState(now);
+    post('Opening balance — you arrive on the island',
+      [['1000', 25000, 0], ['1100', FOOD_DAY, 0], ['3000', 0, 25000 + FOOD_DAY]],
+      "You brought " + money(25000) + " in cash and one day's food. Assets rise, and Owner's Capital records your claim on them. This is a compound entry: two debits against one credit, and it still balances.");
+  }
+  refreshMarket(false);
+  processElapsedDays();
+  render();
+
+  if (!S.seenIntro) {
+    S.seenIntro = true;
+    openSheet('Welcome to Ledger Island',
+      '<p class="lede">You have ' + money(25000) + ', one day of food, and a patch of sand. Work to earn, eat to survive, and turn what is left into a business.</p>' +
+      '<p class="lede">Three ways to stop trading your own minutes for money: <b>tools</b> raise what every action pays, a <b>crew</b> works while you are away, and a <b>finer house</b> buys you standing — better visitors, longer terms, cheaper credit, better people.</p>' +
+      '<p class="lede">Every one of those choices is written into a real set of books, and the books will tell you which of them actually paid off. Food is ' + money(FOOD_DAY) + ' a person-day. A day passes every 24 real hours. Three days without eating and you collapse.</p>',
+      'Start working', () => commit());
+  } else showReports();
+  saveLocal();
+}
+
+boot(false);
+</script>
+
+</body>
+</html>
