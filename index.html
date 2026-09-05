@@ -4,7 +4,6 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Ledger Island</title>
-<meta name="description" content="An idle island game where every action posts a real double-entry journal entry.">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
@@ -133,7 +132,8 @@ main{flex:1;padding:16px 14px calc(env(safe-area-inset-bottom,0px) + 84px);displ
 .job[disabled]{opacity:.5;cursor:not-allowed}
 .job.locked{background:transparent;border-style:dashed}
 .job.locked .pay{color:var(--ink-3)}
-.job.ready{border-color:var(--accent)}
+.job.busy{border-color:var(--accent)}
+.job[disabled]{opacity:.45}
 .mult{display:inline-block;font-family:var(--font-num);font-size:10px;font-weight:600;padding:1px 5px;border-radius:5px;
   background:var(--gold-soft);color:var(--gold);margin-left:5px}
 
@@ -299,16 +299,11 @@ table.led td.ind{padding-left:14px}
   </div>
   <div class="scene" id="scene"></div>
   <main id="main">
-    <!-- Replaced by render() the moment scripts run. If you can still read this,
-         the page was opened somewhere that does not execute JavaScript. -->
+    <!-- Replaced by render() the moment scripts run. -->
     <section class="card"><header><h2>This page needs JavaScript</h2></header><div class="body">
-      <p class="sub">The island, the ledger and every button on this page are drawn by script, so a viewer that only
+      <p class="sub">The island, the ledger and every button here are drawn by script, so a viewer that only
       displays HTML shows you this instead.</p>
-      <p class="sub">You are most likely looking at a file preview — inside a chat app, a mail client, or the Files
-      app. Those render the markup but block the code.</p>
-      <p class="sub"><b>To play it:</b> open this page in a real browser. Tap the share button and choose
-      <b>Open in Safari</b> or <b>Save to Files</b> and open it from there — or, if this is a file you are hosting,
-      visit its address rather than opening the file itself.</p>
+      <p class="sub"><b>To play it:</b> open this page in a real browser rather than a file preview.</p>
     </div></section>
   </main>
   <nav class="tabs"><div class="inner" id="tabbar"></div></nav>
@@ -357,43 +352,46 @@ const EMERGENCY_FOOD = 11000;
 const LOAN_AMOUNT = 100000;
 const AP_BASE_TERMS = 5;
 const AP_RATE = 0.02;
-const STAFF_EFF = 0.09;           // staff work far slower than a player tapping flat out
+const STAFF_EFF = 0.11;           // staff work far slower than a player tapping flat out
 const SHIFT_CAP_MIN = 480;        // an employee works at most 8 hours a day
 const BASE_WAGE = 22000;          // $220/day asking wage at skill 1.0
 const BASE_SHARE = 0.55;          // contractor's asking share of each delivery
 
-/* `hands` is how well the work delegates. Skilled work delegates badly. */
+/* The four jobs pay within about 25% of each other per minute. What really
+   separates them is how much of your attention they cost — a coconut load is
+   10 seconds of you, a teak panel is two minutes — and how well the work
+   delegates to someone else (`hands`). */
 const JOBS = [
-  { id:'coconut', name:'Harvest coconuts',  hint:'Roadside stall · 10s', pay:250,   cd:10000,  rev:'4000',
+  { id:'coconut', name:'Harvest coconuts',  hint:'Roadside stall',  pay:250,  cd:10000,  rev:'4000',
     memo:'Sold coconuts at the roadside stall', unit:'loads',   hands:1.0 },
-  { id:'fish',    name:'Catch fish',        hint:'Reef shallows · 25s',  pay:900,   cd:25000,  rev:'4000',
-    memo:'Sold the morning catch', unit:'catches',              hands:0.8 },
-  { id:'tour',    name:'Guide tourists',    hint:'Reef walk · 60s',      pay:4000,  cd:60000,  rev:'4100',
-    memo:'Guided a walking tour of the reef', unit:'tours',     hands:0.55 },
-  { id:'carve',   name:'Carve & sell teak', hint:'Workshop · 2m',        pay:12000, cd:120000, rev:'4200',
-    memo:'Sold a carved teak panel', unit:'panels',             hands:0.45 },
+  { id:'fish',    name:'Catch fish',        hint:'Reef shallows',   pay:850,  cd:25000,  rev:'4000',
+    memo:'Sold the morning catch', unit:'catches',              hands:0.95 },
+  { id:'tour',    name:'Guide tourists',    hint:'Reef walk',       pay:2200, cd:60000,  rev:'4100',
+    memo:'Guided a walking tour of the reef', unit:'tours',     hands:0.8 },
+  { id:'carve',   name:'Carve & sell teak', hint:'Workshop',        pay:4400, cd:120000, rev:'4200',
+    memo:'Sold a carved teak panel', unit:'panels',             hands:0.7 },
 ];
 const JOB = id => JOBS.find(j => j.id === id);
 
 /* Tool tracks. Buying a tier raises what every action on that job pays. */
 const TOOLS = {
   coconut: { label:'Coconut harvesting', unlockTier:0, tiers:[
-    { name:'Climbing harness', cost:20000,  life:40,  mult:1.7, blurb:'Reach the high nuts instead of the windfalls.' },
-    { name:'Hand cart',        cost:65000,  life:70,  mult:2.6, blurb:'Carry a whole tree down in one trip.' },
-    { name:'Coconut press',    cost:180000, life:140, mult:4.0, blurb:'Sell oil and copra, not just nuts.' },
+    { name:'Climbing harness', cost:20000,  life:40,  mult:1.35, blurb:'Reach the high nuts instead of the windfalls.' },
+    { name:'Hand cart',        cost:65000,  life:70,  mult:1.80, blurb:'Carry a whole tree down in one trip.' },
+    { name:'Coconut press',    cost:180000, life:140, mult:2.40, blurb:'Sell oil and copra, not just nuts.' },
   ]},
   fish: { label:'Fishing', unlockTier:1, tiers:[
-    { name:'Fishing net',     cost:15000,  life:30,  mult:1.0, blurb:'Unlocks fishing from the shallows.' },
-    { name:'Outrigger canoe', cost:90000,  life:90,  mult:1.9, blurb:'Fish the outer reef where the big ones are.' },
-    { name:'Trap line',       cost:240000, life:150, mult:3.0, blurb:'Twenty traps working while you sleep.' },
+    { name:'Fishing net',     cost:15000,  life:30,  mult:1.00, blurb:'Unlocks fishing from the shallows.' },
+    { name:'Outrigger canoe', cost:90000,  life:90,  mult:1.75, blurb:'Fish the outer reef where the big ones are.' },
+    { name:'Trap line',       cost:240000, life:150, mult:2.00, blurb:'Twenty traps working while you sleep.' },
   ]},
   tour: { label:'Tours', unlockTier:0, tiers:[
-    { name:'Reef map & guidebook', cost:70000,  life:60, mult:1.5, blurb:'Charge for expertise, not just company.' },
-    { name:'Snorkel kit',          cost:200000, life:90, mult:2.3, blurb:'Ten sets of gear turns a walk into an excursion.' },
+    { name:'Reef map & guidebook', cost:70000,  life:60, mult:1.40, blurb:'Charge for expertise, not just company.' },
+    { name:'Snorkel kit',          cost:200000, life:90, mult:1.75, blurb:'Ten sets of gear turns a walk into an excursion.' },
   ]},
   carve: { label:'Teak carving', unlockTier:1, tiers:[
-    { name:'Carving tools',   cost:45000,  life:60,  mult:1.0, blurb:'Unlocks carving and selling teak.' },
-    { name:'Lathe & chisels', cost:260000, life:120, mult:2.0, blurb:'Turn bowls and posts, not just flat panels.' },
+    { name:'Carving tools',   cost:45000,  life:60,  mult:1.00, blurb:'Unlocks carving and selling teak.' },
+    { name:'Lathe & chisels', cost:260000, life:120, mult:1.80, blurb:'Turn bowls and posts, not just flat panels.' },
   ]},
 };
 
@@ -416,7 +414,7 @@ let uiTab = 'island', booksTab = 'journal', crewTab = 'roster';
 
 function blankState(now) {
   return {
-    v: 2, day: 1, startedAt: now, lastCloseAt: now, hunger: 0,
+    v: 3, day: 1, startedAt: now, lastCloseAt: now, hunger: 0,
     prepaidDays: 1, prepaidCents: FOOD_DAY,
     tools: { coconut:0, fish:0, tour:0, carve:0 },
     equip: [],
@@ -424,7 +422,7 @@ function blankState(now) {
     stage: 0, cip: 0, houseCost: 0, houseAccum: 0, houseDone: false,
     ap: [], loan: 0, collapses: 0,
     entryNo: 0, journal: [], bal: {}, today: {},
-    cool: {}, seenIntro: false, reports: [], savedAt: now,
+    act: null, seenIntro: false, reports: [], savedAt: now,
   };
 }
 
@@ -441,7 +439,11 @@ function migrate(o) {
     delete o.gear;
     o.staff = []; o.market = null; o.nextId = 1;
   }
-  return o.v === 2 ? o : null;
+  if (o.v === 2) {
+    /* Four parallel cooldowns became a single activity. */
+    o.v = 3; o.act = null; delete o.cool;
+  }
+  return o.v === 3 ? o : null;
 }
 
 function bal(code) { return S.bal[code] || (S.bal[code] = { d:0, c:0 }); }
@@ -483,10 +485,13 @@ function toolMult(jobId) {
   return owned > 0 ? t.tiers[owned - 1].mult : 1;
 }
 function statusMult(jobId) {
-  return jobId === 'tour' ? 1 + 0.15 * Math.max(0, S.stage - 2) : 1;
+  return jobId === 'tour' ? 1 + 0.05 * Math.max(0, S.stage - 2) : 1;
 }
 function jobPay(jobId) {
   return Math.round(JOB(jobId).pay * toolMult(jobId) * statusMult(jobId));
+}
+function payPerMin(jobId) {
+  return Math.round(jobPay(jobId) * 60000 / JOB(jobId).cd);
 }
 function jobUnlocked(jobId) {
   if (jobId === 'tour') return S.stage >= 3;
@@ -520,18 +525,28 @@ function dailyCost(p) { return p.kind === 'employee' ? p.wage + FOOD_DAY : 0; }
    PLAYER ACTIONS
    ===================================================================== */
 
-function doJob(jobId) {
+/* You have one pair of hands. Starting a job occupies you until it is done;
+   your crew are unaffected and each work their own task in parallel. */
+function startJob(jobId) {
+  if (!jobUnlocked(jobId)) return;
+  if (S.act) return toast('You can only do one thing at a time.');
   const j = JOB(jobId);
-  if (Date.now() < (S.cool[jobId] || 0)) return;
+  const now = Date.now();
+  S.act = { job:jobId, startedAt:now, endsAt:now + j.cd };
+  commit();
+}
+
+/* Revenue is recognised when the work is finished, not when it was started. */
+function settlePlayer(upTo) {
+  if (!S.act || upTo < S.act.endsAt) return false;
+  const jobId = S.act.job, j = JOB(jobId);
   const pay = jobPay(jobId);
   const mult = toolMult(jobId) * statusMult(jobId);
+  S.act = null;
   post(j.memo, [['1000', pay, 0], [j.rev, 0, pay]],
-    mult > 1
-      ? 'Cash comes in, so Cash is debited, and the value you created is credited to revenue. Your tools and standing lift this from ' + money(j.pay) + ' to ' + money(pay) + ' — the same work, better equipped.'
-      : 'Cash comes in, so Cash is debited. The value you created is income, and revenue is credited because it increases your equity.');
-  S.cool[jobId] = Date.now() + j.cd;
-  toast('<b>' + money(pay) + '</b>  Dr Cash · Cr ' + ACCOUNTS[j.rev].name);
-  commit();
+    'The work is finished, so the revenue is earned and recorded now — not when you started it. Cash is debited; revenue is credited because it increases your equity.' +
+    (mult > 1 ? ' Your tools and standing lift this job from ' + money(j.pay) + ' to ' + money(pay) + '.' : ''));
+  return true;
 }
 
 function buyFoodUnits(units) {
@@ -975,16 +990,19 @@ function processElapsedDays() {
   let n = 0;
   while (now - S.lastCloseAt >= DAY_MS && n < 60) {
     S.lastCloseAt += DAY_MS;
-    settleStaff(S.lastCloseAt);   // crew output lands in the day it was earned
+    settlePlayer(S.lastCloseAt);  // your own work lands in the day it was finished
+    settleStaff(S.lastCloseAt);   // and so does the crew's
     closeDay();
     n++;
   }
+  settlePlayer(now);
   settleStaff(now);
   return n;
 }
 
 function sleepEarly() {
   const now = Date.now();
+  settlePlayer(now);
   settleStaff(now);
   S.lastCloseAt = now;
   closeDay();
@@ -1143,16 +1161,29 @@ function viewIsland() {
   else if (S.hunger === 1) warn = '<div class="notice warn"><b>You went hungry yesterday.</b> Two more days and you collapse.</div>';
   else if (cov === 0) warn = '<div class="notice warn"><b>The larder will not cover tomorrow.</b> You need ' + mouths() + ' person-day' + (mouths() === 1 ? '' : 's') + ' a day now.</div>';
 
+  const act = S.act;
   const jobs = JOBS.map(j => {
+    const rate = money(payPerMin(j.id)) + '/min';
+    const len = j.cd < 60000 ? (j.cd / 1000) + 's' : (j.cd / 60000) + 'm';
     if (!jobUnlocked(j.id)) {
-      return '<div class="job locked"><div class="nm"><b>' + esc(j.name) + '</b><span>' + esc(jobLockReason(j.id)) + '</span></div><span class="pay">Locked</span></div>';
+      return '<div class="job locked"><div class="nm"><b>' + esc(j.name) + '</b><span>' +
+        esc(jobLockReason(j.id)) + '</span></div><span class="pay">Locked</span></div>';
     }
     const m = toolMult(j.id) * statusMult(j.id);
-    return '<button class="job" data-job="' + j.id + '"><span class="cool" data-cool="' + j.id + '"></span>' +
-      '<span class="nm"><b>' + esc(j.name) + (m > 1 ? '<span class="mult">' + m.toFixed(1) + '×</span>' : '') + '</b>' +
-      '<span>' + esc(j.hint) + '</span></span>' +
-      '<span class="pay" data-paylabel="' + j.id + '">+' + money(jobPay(j.id)) + '</span></button>';
+    const meta = len + ' of your time · ' + rate + (m > 1 ? '' : '');
+    const busy = act && act.job === j.id;
+    const blocked = act && act.job !== j.id;
+    return '<button class="job' + (busy ? ' busy' : '') + '" data-job="' + j.id + '"' + (blocked ? ' disabled' : '') + '>' +
+      '<span class="cool" data-cool="' + j.id + '"></span>' +
+      '<span class="nm"><b>' + esc(j.name) + (m > 1 ? '<span class="mult">' + m.toFixed(2) + '×</span>' : '') + '</b>' +
+      '<span>' + esc(meta) + '</span></span>' +
+      '<span class="pay" data-paylabel="' + j.id + '">' + (busy ? '…' : '+' + money(jobPay(j.id))) + '</span></button>';
   }).join('');
+
+  const busyNote = act
+    ? '<div class="notice"><b>You are ' + esc(JOB(act.job).name.toLowerCase().replace(/^(harvest|catch|guide|carve & sell)/, m => ({harvest:'harvesting', catch:'catching', guide:'guiding', 'carve & sell':'carving'})[m])) +
+      '.</b> One pair of hands — the other jobs wait until you finish. Your crew are not affected; each of them works their own task.</div>'
+    : '';
 
   const active = S.staff.filter(p => p.job);
   const crewStrip = active.length ? `
@@ -1178,7 +1209,8 @@ function viewIsland() {
   <section class="card">
     <header><h2>Work the island</h2><p>${JOBS.filter(j => jobUnlocked(j.id)).length} of ${JOBS.length} open</p></header>
     <div class="body">
-      <p class="sub">Every job posts a journal entry: cash in on the debit side, revenue on the credit side. Better tools raise what each action pays — that multiplier is the return on what you invested.</p>
+      <p class="sub">All four jobs pay within about a quarter of each other per minute. What differs is the attention they cost: a coconut load is ten seconds of you, a teak panel is two. Tools raise the rate; a crew is how you escape the trade entirely.</p>
+      ${busyNote}
       <div class="jobs">${jobs}</div>
     </div>
   </section>
@@ -1621,8 +1653,7 @@ function loadLocal() {
   try { const raw = localStorage.getItem(SAVE_KEY); return raw ? migrate(JSON.parse(raw)) : null; } catch (e) { return null; }
 }
 /* This copy has no cloud storage of any kind. The island lives in this
-   browser, on this device, and nowhere else — which is what makes the page
-   safe to hand to anyone. Backup codes are the way to move it. */
+   browser, on this device, and nowhere else. Backup codes move it. */
 function backupCode() {
   const slim = Object.assign({}, S, { journal: [], reports: [] });
   return btoa(unescape(encodeURIComponent(JSON.stringify(slim))));
@@ -1634,13 +1665,10 @@ function restoreFrom(code) {
   const ok = migrate(obj);
   if (!ok) return 'That code is from a different game or a version this copy cannot read.';
   S = ok;
-  S.cool = S.cool || {}; S.reports = []; S.journal = S.journal || [];
-  S.staff = S.staff || []; S.equip = S.equip || [];
+  S.reports = []; S.journal = S.journal || []; S.staff = S.staff || []; S.equip = S.equip || [];
   S.tools = S.tools || { coconut:0, fish:0, tour:0, carve:0 };
   S.nextId = S.nextId || 1;
-  refreshMarket(true);
-  processElapsedDays();
-  commit();
+  refreshMarket(true); processElapsedDays(); commit();
   return null;
 }
 
@@ -1649,7 +1677,7 @@ function commit() { saveLocal(); render(); }
 /* ---------- events ---------- */
 document.addEventListener('click', ev => {
   const jb = ev.target.closest('[data-job]:not([data-act])');
-  if (jb && jb.classList.contains('job')) { doJob(jb.dataset.job); return; }
+  if (jb && jb.classList.contains('job')) { startJob(jb.dataset.job); return; }
 
   const tb = ev.target.closest('[data-tab]');
   if (tb) { uiTab = tb.dataset.tab; render(); return; }
@@ -1686,12 +1714,11 @@ document.addEventListener('click', ev => {
       '<p class="lede">This is your whole island — day, cash, crew, tools, house and every account balance. The journal history is left out to keep it short; your balances are all here.</p>' +
       '<textarea class="code" id="backupCode" readonly>' + backupCode() + '</textarea>' +
       '<button class="btn wide" data-act="copycode">Copy to clipboard</button>' +
-      '<p class="sub">Paste it somewhere safe — a note to yourself, an email. Restoring it on any device rebuilds the island exactly.</p>', 'Done');
+      '<p class="sub">Paste it somewhere safe. Restoring it on any device rebuilds the island exactly.</p>', 'Done');
     setTimeout(() => { const t = document.getElementById('backupCode'); if (t) { t.focus(); t.select(); } }, 60);
   }
   else if (act === 'copycode') {
-    const t = document.getElementById('backupCode');
-    if (!t) return;
+    const t = document.getElementById('backupCode'); if (!t) return;
     t.select();
     if (navigator.clipboard && navigator.clipboard.writeText) {
       navigator.clipboard.writeText(t.value).then(() => toast('Backup code copied'), () => toast('Select the text and copy it by hand'));
@@ -1708,9 +1735,7 @@ document.addEventListener('click', ev => {
     if (!t || !t.value.trim()) return toast('Paste a code first.');
     const err = restoreFrom(t.value);
     if (err) { toast(err); return; }
-    el('modalHost').innerHTML = '';
-    toast('Island restored — day ' + S.day);
-    showReports();
+    el('modalHost').innerHTML = ''; toast('Island restored — day ' + S.day); showReports();
   }
   else if (act === 'raise-yes') answerRaise(a.dataset.id, true);
   else if (act === 'raise-no') answerRaise(a.dataset.id, false);
@@ -1728,22 +1753,16 @@ document.addEventListener('click', ev => {
 setInterval(() => {
   if (!S) return;
   const now = Date.now();
-  if (uiTab === 'island') {
-    for (const j of JOBS) {
-      const fill = document.querySelector('[data-cool="' + j.id + '"]');
-      if (!fill) continue;
-      const left = (S.cool[j.id] || 0) - now;
-      const btn = fill.closest('.job');
-      const lbl = document.querySelector('[data-paylabel="' + j.id + '"]');
-      if (left > 0) {
-        fill.style.width = (100 - (left / j.cd) * 100) + '%';
-        btn.classList.remove('ready');
-        if (lbl) lbl.textContent = (left / 1000).toFixed(1) + 's';
-      } else {
-        fill.style.width = '0%'; btn.classList.add('ready');
-        if (lbl) lbl.textContent = '+' + money(jobPay(j.id));
-      }
-    }
+  if (S.act && now >= S.act.endsAt) {
+    const j = JOB(S.act.job);
+    if (settlePlayer(now)) { toast('<b>' + money(jobPay(j.id)) + '</b>  Dr Cash · Cr ' + ACCOUNTS[j.rev].name); commit(); }
+  } else if (uiTab === 'island' && S.act) {
+    const j = JOB(S.act.job);
+    const fill = document.querySelector('[data-cool="' + S.act.job + '"]');
+    const lbl = document.querySelector('[data-paylabel="' + S.act.job + '"]');
+    const left = S.act.endsAt - now;
+    if (fill) fill.style.width = (100 - (left / j.cd) * 100) + '%';
+    if (lbl) lbl.textContent = (left / 1000).toFixed(1) + 's';
   }
   for (const p of S.staff) {
     const t = document.querySelector('[data-shift="' + p.id + '"]');
@@ -1776,7 +1795,7 @@ function boot(fresh) {
   const loaded = fresh ? null : loadLocal();
   if (loaded) {
     S = loaded;
-    S.cool = S.cool || {}; S.reports = S.reports || []; S.staff = S.staff || []; S.equip = S.equip || [];
+    S.reports = S.reports || []; S.staff = S.staff || []; S.equip = S.equip || [];
     S.tools = S.tools || { coconut:0, fish:0, tour:0, carve:0 };
     S.nextId = S.nextId || 1;
   } else {
